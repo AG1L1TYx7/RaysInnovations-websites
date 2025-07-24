@@ -6,6 +6,8 @@ export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  
+  console.log('Navigation render - isServicesOpen:', isServicesOpen);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -94,8 +96,14 @@ export default function Navigation() {
                 {/* Services Mega Menu */}
                 <div 
                   className="relative"
-                  onMouseEnter={() => setIsServicesOpen(true)}
-                  onMouseLeave={() => setIsServicesOpen(false)}
+                  onMouseEnter={() => {
+                    console.log('Mouse enter services');
+                    setIsServicesOpen(true);
+                  }}
+                  onMouseLeave={() => {
+                    console.log('Mouse leave services');
+                    setIsServicesOpen(false);
+                  }}
                 >
                   <button className="text-gray-700 hover:text-primary px-3 py-2 text-sm font-medium flex items-center transition-colors">
                     Services
@@ -108,14 +116,16 @@ export default function Navigation() {
                   
                   {/* Fixed positioned mega menu */}
                   <AnimatePresence>
-                    {isServicesOpen && (
+                    {(isServicesOpen || true) && (
                       <motion.div
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
                         transition={{ duration: 0.3 }}
-                        className="fixed left-1/2 transform -translate-x-1/2 w-[95vw] max-w-5xl bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden z-[9999]"
+                        className="fixed left-1/2 transform -translate-x-1/2 w-[95vw] max-w-5xl bg-white rounded-xl shadow-2xl border-4 border-red-500 overflow-hidden z-[9999]"
                         style={{ top: '64px' }}
+                        onMouseEnter={() => setIsServicesOpen(true)}
+                        onMouseLeave={() => setIsServicesOpen(false)}
                       >
                         <div className="bg-gradient-to-r from-primary to-blue-700 p-4 md:p-6 text-white">
                           <h3 className="text-lg md:text-xl font-bold mb-1 md:mb-2">Our Services</h3>
