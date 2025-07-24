@@ -6,6 +6,7 @@ import { SERVICES } from '@/lib/constants';
 export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const [hoveredService, setHoveredService] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [location, setLocation] = useLocation();
   
@@ -125,7 +126,7 @@ export default function Navigation() {
                           top: '64px',
                           left: '50%',
                           transform: 'translateX(-50%)',
-                          width: 'min(95vw, 1200px)'
+                          width: 'min(95vw, 1400px)'
                         }}
                         onMouseEnter={() => setIsServicesOpen(true)}
                         onMouseLeave={() => setIsServicesOpen(false)}
@@ -135,15 +136,21 @@ export default function Navigation() {
                           <p className="text-blue-100 text-sm md:text-base">Comprehensive IT solutions to transform your business</p>
                         </div>
                         
-                        <div className="p-6">
-                          {/* All Services Grid */}
-                          <div className="mb-8">
+                        <div className="flex">
+                          {/* Left Side - Services Grid */}
+                          <div className="w-2/3 p-6 border-r border-gray-200">
                             <h4 className="text-lg font-bold text-gray-900 mb-6 text-center">All Our Services</h4>
-                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4">
+                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 md:gap-4">
                               {Object.values(SERVICES).map((service, index) => (
                                 <motion.button
                                   key={service.id}
-                                  className="group p-3 md:p-4 rounded-xl hover:bg-gradient-to-br hover:from-blue-50 hover:to-purple-50 border border-gray-100 hover:border-blue-200 cursor-pointer transition-all text-center hover:shadow-lg"
+                                  className={`group p-3 md:p-4 rounded-xl border transition-all text-center hover:shadow-lg ${
+                                    hoveredService === service.id 
+                                      ? 'bg-gradient-to-br from-blue-50 to-purple-50 border-blue-300 shadow-md' 
+                                      : 'hover:bg-gradient-to-br hover:from-blue-50 hover:to-purple-50 border-gray-100 hover:border-blue-200'
+                                  }`}
+                                  onMouseEnter={() => setHoveredService(service.id)}
+                                  onMouseLeave={() => setHoveredService(null)}
                                   onClick={() => {
                                     setIsServicesOpen(false);
                                     scrollToSection('services');
@@ -168,6 +175,82 @@ export default function Navigation() {
                             </div>
                           </div>
                           
+                          {/* Right Side - Service Details */}
+                          <div className="w-1/3 p-6">
+                            <AnimatePresence mode="wait">
+                              {hoveredService ? (
+                                <motion.div
+                                  key={hoveredService}
+                                  initial={{ opacity: 0, x: 20 }}
+                                  animate={{ opacity: 1, x: 0 }}
+                                  exit={{ opacity: 0, x: -20 }}
+                                  transition={{ duration: 0.3 }}
+                                  className="h-full"
+                                >
+                                  {(() => {
+                                    const service = SERVICES[hoveredService as keyof typeof SERVICES];
+                                    if (!service) return null;
+                                    return (
+                                      <div className="space-y-4">
+                                        <div className="flex items-center space-x-3">
+                                          <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${getColorClasses(service.color).replace('text-', 'from-')} to-blue-100 flex items-center justify-center shadow-lg`}>
+                                            <i className={`${service.icon} text-white text-lg`} />
+                                          </div>
+                                          <div>
+                                            <h3 className="text-lg font-bold text-gray-900">{service.title}</h3>
+                                            <span className={`inline-block px-2 py-1 rounded-full text-xs font-medium ${getColorClasses(service.color).replace('text-', 'bg-').replace('-600', '-100')} ${getColorClasses(service.color)}`}>
+                                              {service.category}
+                                            </span>
+                                          </div>
+                                        </div>
+                                        
+                                        <p className="text-gray-700 text-sm leading-relaxed">{service.description}</p>
+                                        
+                                        <div>
+                                          <h4 className="font-semibold text-gray-900 mb-2 text-sm">Key Features:</h4>
+                                          <ul className="space-y-1">
+                                            {service.features.slice(0, 4).map((feature, idx) => (
+                                              <li key={idx} className="text-xs text-gray-600 flex items-start">
+                                                <span className="text-blue-500 mr-2 mt-0.5">•</span>
+                                                {feature}
+                                              </li>
+                                            ))}
+                                          </ul>
+                                        </div>
+                                        
+                                        <div className="pt-4 border-t border-gray-200">
+                                          <button 
+                                            className={`w-full py-2 px-4 rounded-lg bg-gradient-to-r ${getColorClasses(service.color).replace('text-', 'from-')} to-blue-600 text-white font-medium text-sm hover:shadow-lg transition-all duration-300`}
+                                            onClick={() => {
+                                              setIsServicesOpen(false);
+                                              scrollToSection('contact');
+                                            }}
+                                          >
+                                            Get Started with {service.title}
+                                          </button>
+                                        </div>
+                                      </div>
+                                    );
+                                  })()}
+                                </motion.div>
+                              ) : (
+                                <motion.div
+                                  initial={{ opacity: 0 }}
+                                  animate={{ opacity: 1 }}
+                                  className="h-full flex items-center justify-center"
+                                >
+                                  <div className="text-center text-gray-500">
+                                    <i className="fas fa-mouse-pointer text-3xl mb-3 text-gray-400" />
+                                    <p className="text-sm">Hover over a service to see details</p>
+                                  </div>
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
+                          </div>
+                        </div>
+                        
+                        <div className="px-6 pb-6">
+                          {/* Service Categories */}
                           {/* Service Categories */}
                           <div className="border-t border-gray-200 pt-6">
                             <h4 className="text-md font-bold text-gray-900 mb-4 text-center">Browse by Category</h4>
