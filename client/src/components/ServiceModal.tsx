@@ -1,0 +1,342 @@
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
+import { apiRequest } from '@/lib/queryClient';
+import { useToast } from '@/hooks/use-toast';
+import { SERVICES } from '@/lib/constants';
+import { z } from 'zod';
+
+const consultationSchema = z.object({
+  name: z.string().min(2, 'Name must be at least 2 characters'),
+  email: z.string().email('Please enter a valid email address'),
+  phone: z.string().min(10, 'Please enter a valid phone number'),
+  service: z.string().min(1, 'Please select a service'),
+  description: z.string().min(10, 'Please provide more details about your needs'),
+});
+
+type ConsultationForm = z.infer<typeof consultationSchema>;
+
+interface ServiceModalProps {
+  serviceId: string | null;
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export default function ServiceModal({ serviceId, isOpen, onClose }: ServiceModalProps) {
+  const [activeTab, setActiveTab] = useState<'overview' | 'booking'>('overview');
+  const { toast } = useToast();
+
+  const service = serviceId ? SERVICES[serviceId as keyof typeof SERVICES] : null;
+
+  const form = useForm<ConsultationForm>({
+    resolver: zodResolver(consultationSchema),
+    defaultValues: {
+      name: '',
+      email: '',
+      phone: '',
+      service: service?.title || '',
+      description: '',
+    },
+  });
+
+  const bookingMutation = useMutation({
+    mutationFn: async (data: ConsultationForm) => {
+      return apiRequest('POST', '/api/consultation', data);
+    },
+    onSuccess: () => {
+      toast({
+        title: 'Consultation Booked!',
+        description: 'We\'ll contact you within 24 hours to confirm the details.',
+      });
+      form.reset();
+      setActiveTab('overview');
+      onClose();
+    },
+    onError: (error: any) => {
+      toast({
+        title: 'Booking Failed',
+        description: error.message || 'Something went wrong. Please try again.',
+        variant: 'destructive',
+      });
+    },
+  });
+
+  const onSubmit = (data: ConsultationForm) => {
+    bookingMutation.mutate(data);
+  };
+
+  if (!service) return null;
+
+  const getColorClasses = (color: string) => {
+    const colorMap = {
+      orange: {
+        bg: 'bg-orange-100',
+        text: 'text-orange-500',
+        border: 'border-orange-200'
+      },
+      purple: {
+        bg: 'bg-purple-100',
+        text: 'text-purple-500',
+        border: 'border-purple-200'
+      },
+      blue: {
+        bg: 'bg-blue-100',
+        text: 'text-blue-500',
+        border: 'border-blue-200'
+      },
+      green: {
+        bg: 'bg-green-100',
+        text: 'text-green-500',
+        border: 'border-green-200'
+      }
+    };
+    return colorMap[color as keyof typeof colorMap] || colorMap.blue;
+  };
+
+  const colors = getColorClasses(service.color);
+
+  return (
+    <Dialog open={isOpen} onOpenChange={onClose}>
+      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+        <DialogHeader className="pb-4 border-b">
+          <DialogTitle className="text-3xl font-bold text-gray-900">
+            {service.title}
+          </DialogTitle>
+        </DialogHeader>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 p-6">
+          <div className="lg:col-span-2">
+            {/* Service Image */}
+            <img
+              src={service.image}
+              alt={`${service.title} services`}
+              className="w-full h-64 object-cover rounded-lg mb-8"
+            />
+
+            {/* Tab Navigation */}
+            <div className="flex space-x-4 mb-6">
+              <button
+                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                  activeTab === 'overview'
+                    ? 'bg-primary text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+                onClick={() => setActiveTab('overview')}
+              >
+                Service Overview
+              </button>
+              <button
+                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                  activeTab === 'booking'
+                    ? 'bg-primary text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+                onClick={() => setActiveTab('booking')}
+              >
+                Book Consultation
+              </button>
+            </div>
+
+            <AnimatePresence mode="wait">
+              {activeTab === 'overview' && (
+                <motion.div
+                  key="overview"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 20 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <h3 className="text-2xl font-semibold text-gray-900 mb-4">
+                    Transform Your Business with {service.title}
+                  </h3>
+                  
+                  <p className="text-lg text-gray-600 mb-6">
+                    {service.description}
+                  </p>
+                  
+                  <div className="space-y-6 mb-8">
+                    {service.features.map((feature, index) => (
+                      <motion.div
+                        key={index}
+                        className="flex items-start"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                      >
+                        <div className={`${colors.bg} p-2 rounded-lg mr-4 flex-shrink-0`}>
+                          <i className={`${feature.icon} ${colors.text}`} />
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-gray-900 mb-2">{feature.title}</h4>
+                          <p className="text-gray-600">{feature.description}</p>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                  
+                  <div className={`${colors.bg} ${colors.border} border rounded-lg p-6`}>
+                    <h4 className="font-semibold text-gray-900 mb-4">What You Get:</h4>
+                    <ul className="space-y-2">
+                      {service.benefits.map((benefit, index) => (
+                        <li key={index} className="flex items-center">
+                          <i className="fas fa-check text-green-500 mr-3" />
+                          <span className="text-gray-700">{benefit}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </motion.div>
+              )}
+
+              {activeTab === 'booking' && (
+                <motion.div
+                  key="booking"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <h3 className="text-2xl font-semibold text-gray-900 mb-4">
+                    Book Your Free Consultation
+                  </h3>
+                  
+                  <Form {...form}>
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                      <FormField
+                        control={form.control}
+                        name="name"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Full Name</FormLabel>
+                            <FormControl>
+                              <Input placeholder="Your full name" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <FormField
+                          control={form.control}
+                          name="email"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Email Address</FormLabel>
+                              <FormControl>
+                                <Input type="email" placeholder="your@email.com" {...field} />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        <FormField
+                          control={form.control}
+                          name="phone"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Phone Number</FormLabel>
+                              <FormControl>
+                                <Input type="tel" placeholder="+1 (555) 123-4567" {...field} />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+
+                      <FormField
+                        control={form.control}
+                        name="service"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Service</FormLabel>
+                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                              <FormControl>
+                                <SelectTrigger>
+                                  <SelectValue placeholder="Select a service" />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                {Object.values(SERVICES).map((service) => (
+                                  <SelectItem key={service.id} value={service.title}>
+                                    {service.title}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="description"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Project Description</FormLabel>
+                            <FormControl>
+                              <Textarea
+                                placeholder="Tell us about your project requirements and goals..."
+                                className="h-32"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <Button
+                        type="submit"
+                        className="w-full bg-accent hover:bg-yellow-600 text-white font-semibold py-3"
+                        disabled={bookingMutation.isPending}
+                      >
+                        {bookingMutation.isPending ? 'Booking...' : 'Book Free Consultation'}
+                      </Button>
+                    </form>
+                  </Form>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+          
+          {/* Sidebar */}
+          <div>
+            <div className="bg-primary text-white rounded-lg p-6 text-center mb-6">
+              <h4 className="text-xl font-semibold mb-4">Get Expert Advice</h4>
+              <p className="mb-6">Schedule a free consultation with our specialists</p>
+              
+              <Button
+                className="w-full bg-accent hover:bg-yellow-600 text-white font-semibold"
+                onClick={() => setActiveTab('booking')}
+              >
+                Book Now
+              </Button>
+            </div>
+            
+            <div className={`${colors.bg} ${colors.border} border rounded-lg p-4 text-center`}>
+              <h5 className={`font-semibold mb-2 ${colors.text.replace('text-', 'text-')}`}>
+                {service.metric.description}
+              </h5>
+              <p className={`text-3xl font-bold ${colors.text}`}>{service.metric.value}</p>
+              <p className={`text-sm ${colors.text.replace('500', '700')}`}>
+                {service.metric.label}
+              </p>
+            </div>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+}
