@@ -215,4 +215,34 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
   }
+
+  /* About section animations */
+  @keyframes float-vertical {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  .animate-float-vertical {
+    animation: float-vertical 4s ease-in-out infinite;
+  }
+
+  /* Gradient border animation */
+  @keyframes gradient-border {
+    0%, 100% { border-color: rgba(59, 130, 246, 0.5); }
+    50% { border-color: rgba(147, 51, 234, 0.5); }
+  }
+
+  .animate-gradient-border {
+    animation: gradient-border 3s ease-in-out infinite;
+  }
+
+  /* Morphing background */
+  @keyframes morph {
+    0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+    50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+  }
+
+  .animate-morph {
+    animation: morph 8s ease-in-out infinite;
+  }
 }
