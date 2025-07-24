@@ -116,11 +116,8 @@ export default function Navigation() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
                         transition={{ duration: 0.3 }}
-                        className="fixed w-[90vw] max-w-4xl bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden z-[9999]"
+                        className="absolute left-0 mt-2 w-[90vw] max-w-4xl bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden z-[9999]"
                         style={{ 
-                          top: '64px',
-                          left: '50%',
-                          transform: 'translateX(-50%)',
                           maxHeight: '80vh',
                           overflowY: 'auto'
                         }}
