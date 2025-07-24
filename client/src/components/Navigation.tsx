@@ -69,7 +69,7 @@ export default function Navigation() {
 
   return (
     <>
-      <nav className={`fixed w-full top-0 z-50 transition-all duration-300 ${
+      <nav className={`fixed w-full top-0 z-[100] transition-all duration-300 ${
         isScrolled ? 'bg-white/95 backdrop-blur-sm shadow-lg' : 'bg-white'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -93,7 +93,7 @@ export default function Navigation() {
                 
                 {/* Services Mega Menu */}
                 <div 
-                  className="relative group"
+                  className="relative"
                   onMouseEnter={() => setIsServicesOpen(true)}
                   onMouseLeave={() => setIsServicesOpen(false)}
                 >
@@ -106,6 +106,7 @@ export default function Navigation() {
                     />
                   </button>
                   
+                  {/* Fixed positioned mega menu */}
                   <AnimatePresence>
                     {isServicesOpen && (
                       <motion.div
@@ -113,8 +114,8 @@ export default function Navigation() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
                         transition={{ duration: 0.3 }}
-                        className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-[95vw] max-w-4xl bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden"
-                        style={{ left: '50%', transform: 'translateX(-50%)' }}
+                        className="fixed left-1/2 transform -translate-x-1/2 w-[95vw] max-w-5xl bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden z-[9999]"
+                        style={{ top: '64px' }}
                       >
                         <div className="bg-gradient-to-r from-primary to-blue-700 p-4 md:p-6 text-white">
                           <h3 className="text-lg md:text-xl font-bold mb-1 md:mb-2">Our Services</h3>
