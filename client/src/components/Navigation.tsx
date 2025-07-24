@@ -116,8 +116,14 @@ export default function Navigation() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
                         transition={{ duration: 0.3 }}
-                        className="fixed left-1/2 transform -translate-x-1/2 w-[95vw] max-w-5xl bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden z-[9999]"
-                        style={{ top: '64px' }}
+                        className="fixed w-[90vw] max-w-4xl bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden z-[9999]"
+                        style={{ 
+                          top: '64px',
+                          left: '50%',
+                          transform: 'translateX(-50%)',
+                          maxHeight: '80vh',
+                          overflowY: 'auto'
+                        }}
                         onMouseEnter={() => setIsServicesOpen(true)}
                         onMouseLeave={() => setIsServicesOpen(false)}
                       >
@@ -126,8 +132,8 @@ export default function Navigation() {
                           <p className="text-blue-100 text-sm md:text-base">Comprehensive IT solutions to transform your business</p>
                         </div>
                         
-                        <div className="p-4 md:p-6 lg:p-8">
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 lg:gap-8">
+                        <div className="p-4 md:p-6">
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                             {Object.entries(serviceCategories).map(([categoryId, category]) => (
                               <motion.div
                                 key={categoryId}
@@ -147,16 +153,16 @@ export default function Navigation() {
                                   {category.services.map((service) => (
                                     <motion.button
                                       key={service.id}
-                                      className="w-full p-2 md:p-3 rounded-lg hover:bg-gray-50 cursor-pointer transition-all text-left group/item border border-transparent hover:border-gray-200"
+                                      className="w-full p-2 rounded-lg hover:bg-gray-50 cursor-pointer transition-all text-left group/item border border-transparent hover:border-gray-200"
                                       onClick={() => scrollToSection('services')}
-                                      whileHover={{ x: 5 }}
+                                      whileHover={{ x: 3 }}
                                       whileTap={{ scale: 0.98 }}
                                     >
                                       <div className="flex items-start">
-                                        <i className={`${service.icon} ${getColorClasses(service.color)} mr-2 md:mr-3 group-hover/item:scale-110 transition-transform text-sm`} />
+                                        <i className={`${service.icon} ${getColorClasses(service.color)} mr-2 group-hover/item:scale-110 transition-transform text-sm`} />
                                         <div className="min-w-0 flex-1">
-                                          <h5 className="font-semibold text-gray-900 text-xs md:text-sm mb-1 truncate">{service.title}</h5>
-                                          <p className="text-xs text-gray-600 line-clamp-2">{service.shortDescription}</p>
+                                          <h5 className="font-semibold text-gray-900 text-xs mb-1 truncate">{service.title}</h5>
+                                          <p className="text-xs text-gray-600 line-clamp-1">{service.shortDescription}</p>
                                         </div>
                                       </div>
                                     </motion.button>
