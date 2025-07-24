@@ -89,6 +89,17 @@ The application is configured for a two-step build process:
 - Gradient backgrounds and modern UI enhancements
 - Interactive service cards with hover effects
 
+### Documentation and Setup (January 2025)
+- Added comprehensive README.md with installation and setup instructions
+- Documented database schema and storage locations
+- Included troubleshooting guide and API endpoint documentation
+- Clear instructions for local development and production deployment
+- Database information storage:
+  - Development: In-memory storage (MemStorage) or PostgreSQL
+  - Production: PostgreSQL via DATABASE_URL environment variable
+  - Tables: users, inquiries, consultation_bookings
+  - Recommended: Neon serverless PostgreSQL for easy cloud deployment
+
 ### Recent Enhancements (July 2025)
 - Expanded service portfolio from 4 to 10 comprehensive IT services
 - Enhanced mega menu with categorized service organization
