@@ -144,7 +144,10 @@ export default function Navigation() {
                                 <motion.button
                                   key={service.id}
                                   className="group p-3 md:p-4 rounded-xl hover:bg-gradient-to-br hover:from-blue-50 hover:to-purple-50 border border-gray-100 hover:border-blue-200 cursor-pointer transition-all text-center hover:shadow-lg"
-                                  onClick={() => setLocation('/services')}
+                                  onClick={() => {
+                                    setIsServicesOpen(false);
+                                    scrollToSection('services');
+                                  }}
                                   initial={{ opacity: 0, y: 20 }}
                                   animate={{ opacity: 1, y: 0 }}
                                   transition={{ delay: index * 0.05 }}
@@ -173,7 +176,10 @@ export default function Navigation() {
                                 <motion.button
                                   key={categoryId}
                                   className="group p-3 rounded-lg hover:bg-blue-50 border border-gray-100 hover:border-blue-200 cursor-pointer transition-all text-center"
-                                  onClick={() => setLocation('/services')}
+                                  onClick={() => {
+                                    setIsServicesOpen(false);
+                                    scrollToSection('services');
+                                  }}
                                   initial={{ opacity: 0 }}
                                   animate={{ opacity: 1 }}
                                   transition={{ delay: Object.keys(serviceCategories).indexOf(categoryId) * 0.1 }}
