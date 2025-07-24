@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLocation } from 'wouter';
 import { SERVICES } from '@/lib/constants';
 
 export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [location, setLocation] = useLocation();
   
 
 
@@ -116,9 +118,9 @@ export default function Navigation() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
                         transition={{ duration: 0.3 }}
-                        className="absolute left-0 mt-2 w-[90vw] max-w-4xl bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden z-[9999]"
+                        className="absolute left-0 mt-2 w-[95vw] max-w-6xl bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden z-[9999]"
                         style={{ 
-                          maxHeight: '80vh',
+                          maxHeight: '85vh',
                           overflowY: 'auto'
                         }}
                         onMouseEnter={() => setIsServicesOpen(true)}
@@ -129,44 +131,62 @@ export default function Navigation() {
                           <p className="text-blue-100 text-sm md:text-base">Comprehensive IT solutions to transform your business</p>
                         </div>
                         
-                        <div className="p-4 md:p-6">
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                            {Object.entries(serviceCategories).map(([categoryId, category]) => (
-                              <motion.div
-                                key={categoryId}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: Object.keys(serviceCategories).indexOf(categoryId) * 0.1 }}
-                                className="space-y-4"
-                              >
-                                <div className="flex items-center mb-4">
-                                  <div className="bg-primary bg-opacity-10 p-2 rounded-lg mr-3">
-                                    <i className={`${category.icon} text-primary text-lg`} />
+                        <div className="p-6">
+                          {/* All Services Grid */}
+                          <div className="mb-8">
+                            <h4 className="text-lg font-bold text-gray-900 mb-6 text-center">All Our Services</h4>
+                            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                              {Object.values(SERVICES).map((service, index) => (
+                                <motion.button
+                                  key={service.id}
+                                  className="group p-4 rounded-xl hover:bg-gradient-to-br hover:from-blue-50 hover:to-purple-50 border border-gray-100 hover:border-blue-200 cursor-pointer transition-all text-center hover:shadow-lg"
+                                  onClick={() => setLocation('/services')}
+                                  initial={{ opacity: 0, y: 20 }}
+                                  animate={{ opacity: 1, y: 0 }}
+                                  transition={{ delay: index * 0.05 }}
+                                  whileHover={{ y: -2, scale: 1.02 }}
+                                  whileTap={{ scale: 0.98 }}
+                                >
+                                  <div className="flex flex-col items-center space-y-3">
+                                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${getColorClasses(service.color).replace('text-', 'from-')} to-blue-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                                      <i className={`${service.icon} text-white text-lg`} />
+                                    </div>
+                                    <div>
+                                      <h5 className="font-semibold text-gray-900 text-sm mb-1 group-hover:text-blue-700 transition-colors">{service.title}</h5>
+                                      <p className="text-xs text-gray-600 line-clamp-2 group-hover:text-gray-700 transition-colors">{service.shortDescription}</p>
+                                    </div>
                                   </div>
-                                  <h4 className="font-bold text-gray-900 text-lg">{category.title}</h4>
-                                </div>
-                                
-                                <div className="space-y-2">
-                                  {category.services.map((service) => (
-                                    <motion.button
-                                      key={service.id}
-                                      className="w-full p-2 rounded-lg hover:bg-gray-50 cursor-pointer transition-all text-left group/item border border-transparent hover:border-gray-200"
-                                      onClick={() => scrollToSection('services')}
-                                      whileHover={{ x: 3 }}
-                                      whileTap={{ scale: 0.98 }}
-                                    >
-                                      <div className="flex items-start">
-                                        <i className={`${service.icon} ${getColorClasses(service.color)} mr-2 group-hover/item:scale-110 transition-transform text-sm`} />
-                                        <div className="min-w-0 flex-1">
-                                          <h5 className="font-semibold text-gray-900 text-xs mb-1 truncate">{service.title}</h5>
-                                          <p className="text-xs text-gray-600 line-clamp-1">{service.shortDescription}</p>
-                                        </div>
-                                      </div>
-                                    </motion.button>
-                                  ))}
-                                </div>
-                              </motion.div>
-                            ))}
+                                </motion.button>
+                              ))}
+                            </div>
+                          </div>
+                          
+                          {/* Service Categories */}
+                          <div className="border-t border-gray-200 pt-6">
+                            <h4 className="text-md font-bold text-gray-900 mb-4 text-center">Browse by Category</h4>
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                              {Object.entries(serviceCategories).map(([categoryId, category]) => (
+                                <motion.button
+                                  key={categoryId}
+                                  className="group p-3 rounded-lg hover:bg-blue-50 border border-gray-100 hover:border-blue-200 cursor-pointer transition-all text-center"
+                                  onClick={() => setLocation('/services')}
+                                  initial={{ opacity: 0 }}
+                                  animate={{ opacity: 1 }}
+                                  transition={{ delay: Object.keys(serviceCategories).indexOf(categoryId) * 0.1 }}
+                                  whileHover={{ scale: 1.02 }}
+                                >
+                                  <div className="flex flex-col items-center space-y-2">
+                                    <div className="bg-primary bg-opacity-10 group-hover:bg-opacity-20 p-2 rounded-lg transition-colors">
+                                      <i className={`${category.icon} text-primary text-lg`} />
+                                    </div>
+                                    <div>
+                                      <h5 className="font-semibold text-gray-900 text-xs group-hover:text-blue-700 transition-colors">{category.title}</h5>
+                                      <p className="text-xs text-gray-500">{category.services.length} services</p>
+                                    </div>
+                                  </div>
+                                </motion.button>
+                              ))}
+                            </div>
                           </div>
                           
                           <div className="mt-6 md:mt-8 pt-4 md:pt-6 border-t border-gray-200">
