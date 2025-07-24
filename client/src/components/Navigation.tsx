@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useLocation } from 'wouter';
+import { useLocation, Link } from 'wouter';
 import { SERVICES } from '@/lib/constants';
 
 export default function Navigation() {
@@ -355,12 +355,9 @@ export default function Navigation() {
                 >
                   About
                 </button>
-                <button
-                  onClick={() => scrollToSection('blog')}
-                  className="text-gray-700 hover:text-primary px-3 py-2 text-sm font-medium transition-colors"
-                >
+                <Link href="/blog" className="text-gray-700 hover:text-primary px-3 py-2 text-sm font-medium transition-colors">
                   Blog
-                </button>
+                </Link>
                 <button
                   onClick={() => scrollToSection('contact')}
                   className="text-gray-700 hover:text-primary px-3 py-2 text-sm font-medium transition-colors"
@@ -424,12 +421,9 @@ export default function Navigation() {
                 >
                   About
                 </button>
-                <button
-                  onClick={() => scrollToSection('blog')}
-                  className="block w-full text-left px-3 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
-                >
+                <Link href="/blog" className="block w-full text-left px-3 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors">
                   Blog
-                </button>
+                </Link>
                 <button
                   onClick={() => scrollToSection('contact')}
                   className="block w-full text-left px-3 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors"

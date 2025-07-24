@@ -175,32 +175,21 @@ export default function AboutSection() {
               ))}
             </motion.div>
             
-            {/* CTA Buttons */}
-            <div className="flex flex-wrap gap-4">
-              <motion.button
-                className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl hover:shadow-2xl transition-all duration-300 font-semibold text-lg relative overflow-hidden group"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => {
-                  const element = document.getElementById('contact');
-                  if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
-              >
-                <span className="relative z-10">Start Your Journey</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </motion.button>
-              
-              <motion.button
-                className="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-xl hover:border-blue-500 hover:text-blue-600 transition-all duration-300 font-semibold text-lg"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <i className="fas fa-play-circle mr-2"></i>
-                Watch Our Story
-              </motion.button>
-            </div>
+            {/* CTA Button */}
+            <motion.button
+              className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl hover:shadow-2xl transition-all duration-300 font-semibold text-lg relative overflow-hidden group"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => {
+                const element = document.getElementById('contact');
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+            >
+              <span className="relative z-10">Start Your Journey</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </motion.button>
           </motion.div>
         </div>
 
@@ -248,67 +237,7 @@ export default function AboutSection() {
           </div>
         </motion.div>
 
-        {/* Company Timeline */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="mt-24"
-        >
-          <h3 className="text-3xl font-bold text-center mb-12 text-gray-900">Our Journey</h3>
-          <div className="relative">
-            {/* Timeline line */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-blue-300 via-purple-300 to-indigo-300 hidden lg:block"></div>
-            
-            {/* Timeline items */}
-            <div className="space-y-12">
-              {[
-                { year: '2014', title: 'Founded', description: 'Started with a vision to transform businesses digitally', icon: 'fas fa-seedling', color: 'from-blue-500 to-cyan-500' },
-                { year: '2017', title: 'Cloud Expansion', description: 'Became AWS Advanced Consulting Partner', icon: 'fas fa-cloud', color: 'from-purple-500 to-pink-500' },
-                { year: '2020', title: 'AI Innovation', description: 'Launched AI & Machine Learning division', icon: 'fas fa-brain', color: 'from-indigo-500 to-blue-500' },
-                { year: '2024', title: 'Global Reach', description: 'Serving 500+ clients across 20 countries', icon: 'fas fa-globe', color: 'from-green-500 to-emerald-500' }
-              ].map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.2, duration: 0.6 }}
-                  viewport={{ once: true }}
-                  className={`flex items-center ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} flex-col lg:gap-8`}
-                >
-                  <div className="flex-1">
-                    <div className={`${index % 2 === 0 ? 'lg:text-right' : 'lg:text-left'} text-center`}>
-                      <motion.div
-                        whileHover={{ scale: 1.05 }}
-                        className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 inline-block"
-                      >
-                        <div className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
-                          {item.year}
-                        </div>
-                        <h4 className="text-xl font-bold text-gray-900 mb-2">{item.title}</h4>
-                        <p className="text-gray-600">{item.description}</p>
-                      </motion.div>
-                    </div>
-                  </div>
-                  
-                  {/* Center icon */}
-                  <motion.div
-                    whileHover={{ rotate: 360 }}
-                    transition={{ duration: 0.6 }}
-                    className="relative z-10"
-                  >
-                    <div className={`w-20 h-20 bg-gradient-to-br ${item.color} rounded-full flex items-center justify-center shadow-xl`}>
-                      <i className={`${item.icon} text-white text-2xl`}></i>
-                    </div>
-                  </motion.div>
-                  
-                  <div className="flex-1 hidden lg:block"></div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </motion.div>
+
 
         {/* Team Section Preview */}
         <motion.div

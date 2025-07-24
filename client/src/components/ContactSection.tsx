@@ -86,8 +86,12 @@ export default function ContactSection() {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="py-24 bg-gradient-to-br from-gray-50 via-white to-blue-50 relative overflow-hidden">
+      {/* Background decorations */}
+      <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-blue-100/20 to-purple-100/20 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tr from-purple-100/20 to-pink-100/20 rounded-full blur-3xl"></div>
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -95,8 +99,20 @@ export default function ContactSection() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Get In Touch</h2>
-          <p className="text-xl text-gray-600">Ready to transform your business? Let's discuss your project</p>
+          <motion.span
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            className="text-blue-600 font-semibold text-lg mb-4 block"
+          >
+            Let's Connect
+          </motion.span>
+          <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-blue-800 to-purple-900 bg-clip-text text-transparent">
+            Start Your Digital Journey
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Ready to transform your business? Our experts are here to discuss your vision and create tailored solutions
+          </p>
         </motion.div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -106,9 +122,12 @@ export default function ContactSection() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="bg-white rounded-xl shadow-lg p-8"
+            className="bg-white rounded-2xl shadow-2xl p-8 lg:p-10 relative overflow-hidden"
           >
-            <h3 className="text-2xl font-semibold text-gray-900 mb-6">Send us a message</h3>
+            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-50 to-purple-50 rounded-full -translate-y-16 translate-x-16 opacity-50"></div>
+            <div className="relative z-10">
+              <h3 className="text-3xl font-bold text-gray-900 mb-2">Send us a message</h3>
+              <p className="text-gray-600 mb-8">Fill out the form below and we'll get back to you within 24 hours</p>
             
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -223,6 +242,7 @@ export default function ContactSection() {
                 </Button>
               </form>
             </Form>
+            </div>
           </motion.div>
           
           {/* Contact Info & Map */}
@@ -232,8 +252,9 @@ export default function ContactSection() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <div className="bg-white rounded-xl shadow-lg p-8 mb-8">
-              <h3 className="text-2xl font-semibold text-gray-900 mb-6">Contact Information</h3>
+            <div className="bg-white rounded-2xl shadow-2xl p-8 mb-8 relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-24 h-24 bg-gradient-to-br from-blue-50 to-purple-50 rounded-full -translate-y-12 -translate-x-12 opacity-50"></div>
+              <h3 className="text-3xl font-bold text-gray-900 mb-6 relative z-10">Get in Touch</h3>
               
               <div className="space-y-6">
                 {contactInfo.map((info, index) => (
@@ -245,13 +266,13 @@ export default function ContactSection() {
                     transition={{ delay: index * 0.1 }}
                     viewport={{ once: true }}
                   >
-                    <div className="bg-primary bg-opacity-10 p-3 rounded-lg flex-shrink-0">
-                      <i className={`${info.icon} text-primary text-xl`} />
+                    <div className="bg-gradient-to-br from-blue-500 to-purple-600 p-4 rounded-xl flex-shrink-0 shadow-lg">
+                      <i className={`${info.icon} text-white text-2xl`} />
                     </div>
-                    <div className="ml-4">
-                      <h4 className="font-semibold text-gray-900 mb-1">{info.title}</h4>
+                    <div className="ml-5">
+                      <h4 className="font-bold text-gray-900 mb-2 text-lg">{info.title}</h4>
                       {info.content.map((line, i) => (
-                        <p key={i} className="text-gray-600">
+                        <p key={i} className="text-gray-600 text-base">
                           {line}
                         </p>
                       ))}
@@ -267,21 +288,51 @@ export default function ContactSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
               viewport={{ once: true }}
-              className="bg-gray-300 rounded-xl h-64 flex items-center justify-center relative overflow-hidden"
+              className="bg-gradient-to-br from-blue-100 via-purple-50 to-pink-100 rounded-2xl h-80 flex items-center justify-center relative overflow-hidden shadow-2xl"
             >
-              <div className="text-center">
-                <i className="fas fa-map text-4xl text-gray-500 mb-4" />
-                <p className="text-gray-600 font-medium">Interactive Map</p>
-                <p className="text-sm text-gray-500">123 Innovation Drive, Tech Hub, CA 90210</p>
+              <div className="absolute inset-0 bg-white/30 backdrop-blur-sm"></div>
+              <div className="text-center relative z-10">
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                  className="inline-block mb-4"
+                >
+                  <i className="fas fa-globe text-6xl text-blue-600/50" />
+                </motion.div>
+                <p className="text-2xl font-bold text-gray-800 mb-2">Visit Our Office</p>
+                <p className="text-lg text-gray-600 font-medium">123 Innovation Drive</p>
+                <p className="text-lg text-gray-600">Tech Hub, CA 90210</p>
+                <motion.button
+                  className="mt-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Get Directions
+                  <i className="fas fa-arrow-right ml-2"></i>
+                </motion.button>
               </div>
               
               {/* Animated map markers */}
               <motion.div
-                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                className="absolute top-1/4 left-1/4"
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
-                <i className="fas fa-map-marker-alt text-red-500 text-2xl" />
+                <i className="fas fa-map-marker-alt text-red-500 text-3xl" />
+              </motion.div>
+              <motion.div
+                className="absolute bottom-1/3 right-1/4"
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+              >
+                <i className="fas fa-map-marker-alt text-purple-500 text-2xl" />
+              </motion.div>
+              <motion.div
+                className="absolute top-1/3 right-1/3"
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+              >
+                <i className="fas fa-map-marker-alt text-blue-500 text-2xl" />
               </motion.div>
             </motion.div>
           </motion.div>
