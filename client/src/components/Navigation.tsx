@@ -157,10 +157,10 @@ export default function Navigation() {
                           <div className="absolute bottom-4 left-4 w-16 h-16 bg-yellow-400/20 rounded-full blur-lg"></div>
                         </div>
                         
-                        {/* Main Content */}
-                        <div className="p-8">
-                          {/* Services Grid - Perfectly Centered */}
-                          <div className="mb-8">
+                        {/* Main Content - Left Aligned Services */}
+                        <div className="flex">
+                          {/* Left Side - Services Grid */}
+                          <div className="w-1/2 p-6 border-r border-gray-200">
                             <motion.h4 
                               initial={{ opacity: 0 }}
                               animate={{ opacity: 1 }}
@@ -170,13 +170,13 @@ export default function Navigation() {
                               All Services
                             </motion.h4>
                             
-                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 justify-items-center max-w-7xl mx-auto">
+                            <div className="grid grid-cols-2 gap-4 max-w-lg mx-auto">
                               {Object.values(SERVICES).map((service, index) => (
                                 <motion.button
                                   key={service.id}
-                                  className={`group relative w-full max-w-[160px] p-4 rounded-2xl border transition-all duration-300 hover:shadow-xl ${
+                                  className={`group relative w-full p-3 rounded-xl border transition-all duration-300 hover:shadow-lg ${
                                     hoveredService === service.id 
-                                      ? 'bg-gradient-to-br from-blue-50 to-purple-50 border-blue-300 shadow-lg scale-105' 
+                                      ? 'bg-gradient-to-br from-blue-50 to-purple-50 border-blue-300 shadow-md scale-105' 
                                       : 'bg-white hover:bg-gradient-to-br hover:from-blue-50 hover:to-purple-50 border-gray-200 hover:border-blue-300'
                                   }`}
                                   onMouseEnter={() => setHoveredService(service.id)}
@@ -194,16 +194,16 @@ export default function Navigation() {
                                   {/* Glow effect */}
                                   <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl blur opacity-0 group-hover:opacity-30 transition duration-500"></div>
                                   
-                                  <div className="relative flex flex-col items-center text-center space-y-3">
+                                  <div className="relative flex items-center space-x-3 text-left">
                                     {/* Enhanced Icon */}
-                                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${getColorClasses(service.color).replace('text-', 'from-')} to-blue-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg relative overflow-hidden`}>
+                                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${getColorClasses(service.color).replace('text-', 'from-')} to-blue-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg relative overflow-hidden flex-shrink-0`}>
                                       <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/20 to-transparent"></div>
-                                      <i className={`${service.icon} text-white text-xl relative z-10`} />
+                                      <i className={`${service.icon} text-white text-lg relative z-10`} />
                                     </div>
                                     
                                     {/* Service Info */}
-                                    <div>
-                                      <h5 className="font-bold text-gray-900 text-sm mb-1 group-hover:text-blue-700 transition-colors leading-tight">
+                                    <div className="flex-1 min-w-0">
+                                      <h5 className="font-semibold text-gray-900 text-sm mb-1 group-hover:text-blue-700 transition-colors leading-tight">
                                         {service.title}
                                       </h5>
                                       <p className="text-xs text-gray-600 group-hover:text-gray-700 transition-colors line-clamp-2">
@@ -212,61 +212,62 @@ export default function Navigation() {
                                     </div>
                                     
                                     {/* Hover indicator */}
-                                    <div className="absolute top-2 right-2 w-2 h-2 bg-blue-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse"></div>
+                                    <div className="w-2 h-2 bg-blue-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse flex-shrink-0"></div>
                                   </div>
                                 </motion.button>
                               ))}
                             </div>
                           </div>
 
-                          {/* Service Details Panel */}
-                          <AnimatePresence mode="wait">
-                            {hoveredService ? (
-                              <motion.div
-                                key={hoveredService}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -20 }}
-                                transition={{ duration: 0.3 }}
-                                className="bg-gradient-to-br from-blue-50/50 to-purple-50/50 rounded-2xl p-6 border border-blue-100"
-                              >
+                          {/* Right Side - Service Details Panel */}
+                          <div className="w-1/2 p-6">
+                            <AnimatePresence mode="wait">
+                              {hoveredService ? (
+                                <motion.div
+                                  key={hoveredService}
+                                  initial={{ opacity: 0, x: 20 }}
+                                  animate={{ opacity: 1, x: 0 }}
+                                  exit={{ opacity: 0, x: -20 }}
+                                  transition={{ duration: 0.3 }}
+                                  className="h-full"
+                                >
                                 {(() => {
                                   const service = SERVICES[hoveredService as keyof typeof SERVICES];
                                   if (!service) return null;
                                   return (
-                                    <div className="grid md:grid-cols-2 gap-6">
-                                      {/* Left side - Service info */}
-                                      <div className="space-y-4">
-                                        <div className="flex items-center space-x-4">
-                                          <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${getColorClasses(service.color).replace('text-', 'from-')} to-blue-100 flex items-center justify-center shadow-lg`}>
-                                            <i className={`${service.icon} text-white text-2xl`} />
-                                          </div>
-                                          <div>
-                                            <h4 className="font-bold text-gray-900 text-xl">{service.title}</h4>
-                                            <p className="text-gray-600">{service.shortDescription}</p>
-                                          </div>
+                                    <div className="space-y-6">
+                                      {/* Service Header */}
+                                      <div className="flex items-center space-x-4">
+                                        <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${getColorClasses(service.color).replace('text-', 'from-')} to-blue-100 flex items-center justify-center shadow-lg`}>
+                                          <i className={`${service.icon} text-white text-2xl`} />
                                         </div>
-                                        
-                                        <p className="text-gray-700 leading-relaxed">{service.description}</p>
+                                        <div>
+                                          <h4 className="font-bold text-gray-900 text-xl">{service.title}</h4>
+                                          <p className="text-gray-600">{service.shortDescription}</p>
+                                        </div>
                                       </div>
                                       
-                                      {/* Right side - Features and CTA */}
-                                      <div className="space-y-4">
-                                        <div>
-                                          <h5 className="font-semibold text-gray-900 mb-3">Key Features:</h5>
-                                          <div className="grid grid-cols-1 gap-3">
-                                            {service.features.slice(0, 3).map((feature, idx) => (
-                                              <div key={idx} className="flex items-start space-x-3 p-3 bg-white/70 rounded-lg">
-                                                <i className={`${feature.icon} text-blue-600 mt-1`} />
-                                                <div>
-                                                  <span className="font-medium text-gray-800 text-sm">{feature.title}</span>
-                                                  <p className="text-gray-600 text-xs mt-1 leading-relaxed">{feature.description}</p>
-                                                </div>
+                                      {/* Service Description */}
+                                      <p className="text-gray-700 leading-relaxed">{service.description}</p>
+                                      
+                                      {/* Key Features */}
+                                      <div>
+                                        <h5 className="font-semibold text-gray-900 mb-3">Key Features:</h5>
+                                        <div className="space-y-3">
+                                          {service.features.slice(0, 4).map((feature, idx) => (
+                                            <div key={idx} className="flex items-start space-x-3 p-3 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border border-blue-100">
+                                              <i className={`${feature.icon} text-blue-600 mt-1`} />
+                                              <div>
+                                                <span className="font-medium text-gray-800 text-sm">{feature.title}</span>
+                                                <p className="text-gray-600 text-xs mt-1 leading-relaxed">{feature.description}</p>
                                               </div>
-                                            ))}
-                                          </div>
+                                            </div>
+                                          ))}
                                         </div>
-                                        
+                                      </div>
+                                      
+                                      {/* Call to Action */}
+                                      <div className="pt-4 border-t border-gray-200">
                                         <div className="flex gap-3">
                                           <button 
                                             className={`flex-1 py-3 px-4 rounded-xl bg-gradient-to-r ${getColorClasses(service.color).replace('text-', 'from-')} to-blue-600 text-white font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105`}
@@ -296,55 +297,56 @@ export default function Navigation() {
                               <motion.div
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
-                                className="text-center py-8 bg-gradient-to-br from-gray-50 to-blue-50 rounded-2xl border border-gray-100"
+                                className="h-full flex items-center justify-center text-center"
                               >
-                                <div className="space-y-3">
+                                <div className="space-y-4">
                                   <div className="w-20 h-20 mx-auto bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl flex items-center justify-center">
                                     <i className="fas fa-hand-pointer text-blue-600 text-3xl" />
                                   </div>
-                                  <h4 className="font-bold text-gray-900 text-lg">Explore Our Services</h4>
-                                  <p className="text-gray-600">Hover over any service above to see detailed information and features</p>
+                                  <h4 className="font-bold text-gray-900 text-lg">Discover Our Services</h4>
+                                  <p className="text-gray-600">Hover over any service on the left to see detailed information</p>
                                 </div>
                               </motion.div>
                             )}
                           </AnimatePresence>
-
-                          {/* Bottom CTA */}
-                          <motion.div 
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.5 }}
-                            className="mt-8 pt-6 border-t border-gray-200 text-center"
-                          >
-                            <p className="text-gray-600 mb-4">Ready to transform your business with premium IT solutions?</p>
-                            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                              <motion.button
-                                className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                onClick={() => {
-                                  setIsServicesOpen(false);
-                                  scrollToSection('contact');
-                                }}
-                              >
-                                <i className="fas fa-rocket mr-2"></i>
-                                Start Your Project
-                              </motion.button>
-                              <motion.button
-                                className="border-2 border-blue-300 text-blue-700 px-8 py-3 rounded-xl font-semibold hover:bg-blue-50 transition-all duration-300"
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                onClick={() => {
-                                  setIsServicesOpen(false);
-                                  scrollToSection('contact');
-                                }}
-                              >
-                                <i className="fas fa-calendar-alt mr-2"></i>
-                                Book Consultation
-                              </motion.button>
-                            </div>
-                          </motion.div>
+                          </div>
                         </div>
+
+                        {/* Bottom CTA */}
+                        <motion.div 
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.5 }}
+                          className="px-8 pb-8 pt-6 border-t border-gray-200 text-center"
+                        >
+                          <p className="text-gray-600 mb-4">Ready to transform your business with premium IT solutions?</p>
+                          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                            <motion.button
+                              className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
+                              onClick={() => {
+                                setIsServicesOpen(false);
+                                scrollToSection('contact');
+                              }}
+                            >
+                              <i className="fas fa-rocket mr-2"></i>
+                              Start Your Project
+                            </motion.button>
+                            <motion.button
+                              className="border-2 border-blue-300 text-blue-700 px-8 py-3 rounded-xl font-semibold hover:bg-blue-50 transition-all duration-300"
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
+                              onClick={() => {
+                                setIsServicesOpen(false);
+                                scrollToSection('contact');
+                              }}
+                            >
+                              <i className="fas fa-calendar-alt mr-2"></i>
+                              Book Consultation
+                            </motion.button>
+                          </div>
+                        </motion.div>
 
                       </motion.div>
                     )}
