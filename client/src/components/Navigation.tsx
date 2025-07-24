@@ -113,15 +113,16 @@ export default function Navigation() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
                         transition={{ duration: 0.3 }}
-                        className="absolute left-0 mt-2 w-[800px] bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden"
+                        className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-[95vw] max-w-4xl bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden"
+                        style={{ left: '50%', transform: 'translateX(-50%)' }}
                       >
-                        <div className="bg-gradient-to-r from-primary to-blue-700 p-6 text-white">
-                          <h3 className="text-xl font-bold mb-2">Our Services</h3>
-                          <p className="text-blue-100">Comprehensive IT solutions to transform your business</p>
+                        <div className="bg-gradient-to-r from-primary to-blue-700 p-4 md:p-6 text-white">
+                          <h3 className="text-lg md:text-xl font-bold mb-1 md:mb-2">Our Services</h3>
+                          <p className="text-blue-100 text-sm md:text-base">Comprehensive IT solutions to transform your business</p>
                         </div>
                         
-                        <div className="p-8">
-                          <div className="grid grid-cols-2 gap-8">
+                        <div className="p-4 md:p-6 lg:p-8">
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 lg:gap-8">
                             {Object.entries(serviceCategories).map(([categoryId, category]) => (
                               <motion.div
                                 key={categoryId}
@@ -141,16 +142,16 @@ export default function Navigation() {
                                   {category.services.map((service) => (
                                     <motion.button
                                       key={service.id}
-                                      className="w-full p-3 rounded-lg hover:bg-gray-50 cursor-pointer transition-all text-left group/item border border-transparent hover:border-gray-200"
+                                      className="w-full p-2 md:p-3 rounded-lg hover:bg-gray-50 cursor-pointer transition-all text-left group/item border border-transparent hover:border-gray-200"
                                       onClick={() => scrollToSection('services')}
                                       whileHover={{ x: 5 }}
                                       whileTap={{ scale: 0.98 }}
                                     >
-                                      <div className="flex items-center">
-                                        <i className={`${service.icon} ${getColorClasses(service.color)} mr-3 group-hover/item:scale-110 transition-transform`} />
-                                        <div>
-                                          <h5 className="font-semibold text-gray-900 text-sm mb-1">{service.title}</h5>
-                                          <p className="text-xs text-gray-600">{service.shortDescription}</p>
+                                      <div className="flex items-start">
+                                        <i className={`${service.icon} ${getColorClasses(service.color)} mr-2 md:mr-3 group-hover/item:scale-110 transition-transform text-sm`} />
+                                        <div className="min-w-0 flex-1">
+                                          <h5 className="font-semibold text-gray-900 text-xs md:text-sm mb-1 truncate">{service.title}</h5>
+                                          <p className="text-xs text-gray-600 line-clamp-2">{service.shortDescription}</p>
                                         </div>
                                       </div>
                                     </motion.button>
@@ -160,14 +161,14 @@ export default function Navigation() {
                             ))}
                           </div>
                           
-                          <div className="mt-8 pt-6 border-t border-gray-200">
-                            <div className="flex items-center justify-between">
+                          <div className="mt-6 md:mt-8 pt-4 md:pt-6 border-t border-gray-200">
+                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                               <div>
-                                <h4 className="font-semibold text-gray-900 mb-1">Need Custom Solutions?</h4>
-                                <p className="text-sm text-gray-600">Let's discuss your specific requirements</p>
+                                <h4 className="font-semibold text-gray-900 mb-1 text-sm md:text-base">Need Custom Solutions?</h4>
+                                <p className="text-xs md:text-sm text-gray-600">Let's discuss your specific requirements</p>
                               </div>
                               <motion.button
-                                className="bg-accent text-white px-6 py-2 rounded-lg hover:bg-yellow-600 transition-colors font-medium"
+                                className="bg-accent text-white px-4 md:px-6 py-2 rounded-lg hover:bg-yellow-600 transition-colors font-medium text-sm md:text-base shrink-0"
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 onClick={() => scrollToSection('contact')}
