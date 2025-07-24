@@ -131,30 +131,89 @@ export default function ServicesSection() {
             <span className="text-blue-600 font-semibold"> 10+ specialized services</span>
           </p>
 
-          {/* Service Statistics */}
+          {/* Enhanced Service Statistics with animations */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
-            className="flex flex-wrap justify-center gap-8 mb-16"
+            className="flex flex-wrap justify-center gap-6 lg:gap-12 mb-20"
           >
-            <div className="text-center">
-              <div className="text-3xl font-bold text-blue-600 mb-1">500+</div>
-              <div className="text-sm text-gray-600">Projects Completed</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-purple-600 mb-1">10+</div>
-              <div className="text-sm text-gray-600">Service Categories</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-indigo-600 mb-1">99%</div>
-              <div className="text-sm text-gray-600">Client Satisfaction</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-cyan-600 mb-1">24/7</div>
-              <div className="text-sm text-gray-600">Expert Support</div>
-            </div>
+            <motion.div 
+              className="relative group"
+              whileHover={{ scale: 1.1 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <div className="absolute -inset-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500"></div>
+              <div className="relative bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-blue-100">
+                <motion.div 
+                  className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2"
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  transition={{ delay: 0.5, type: "spring", stiffness: 200 }}
+                >
+                  500+
+                </motion.div>
+                <div className="text-sm text-gray-600 font-medium">Projects Delivered</div>
+              </div>
+            </motion.div>
+            
+            <motion.div 
+              className="relative group"
+              whileHover={{ scale: 1.1 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <div className="absolute -inset-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500"></div>
+              <div className="relative bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-purple-100">
+                <motion.div 
+                  className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-2"
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  transition={{ delay: 0.6, type: "spring", stiffness: 200 }}
+                >
+                  50+
+                </motion.div>
+                <div className="text-sm text-gray-600 font-medium">Expert Team</div>
+              </div>
+            </motion.div>
+            
+            <motion.div 
+              className="relative group"
+              whileHover={{ scale: 1.1 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <div className="absolute -inset-4 bg-gradient-to-r from-indigo-500 to-blue-500 rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500"></div>
+              <div className="relative bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-indigo-100">
+                <motion.div 
+                  className="text-4xl font-bold bg-gradient-to-r from-indigo-600 to-blue-600 bg-clip-text text-transparent mb-2"
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  transition={{ delay: 0.7, type: "spring", stiffness: 200 }}
+                >
+                  99.9%
+                </motion.div>
+                <div className="text-sm text-gray-600 font-medium">Uptime Guarantee</div>
+              </div>
+            </motion.div>
+            
+            <motion.div 
+              className="relative group"
+              whileHover={{ scale: 1.1 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500 to-teal-500 rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500"></div>
+              <div className="relative bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-cyan-100">
+                <motion.div 
+                  className="text-4xl font-bold bg-gradient-to-r from-cyan-600 to-teal-600 bg-clip-text text-transparent mb-2"
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  transition={{ delay: 0.8, type: "spring", stiffness: 200 }}
+                >
+                  24/7
+                </motion.div>
+                <div className="text-sm text-gray-600 font-medium">Support Available</div>
+              </div>
+            </motion.div>
           </motion.div>
         </motion.div>
         
@@ -179,57 +238,104 @@ export default function ServicesSection() {
                 {/* Enhanced Glow effect on hover */}
                 <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 rounded-3xl blur-lg opacity-0 group-hover:opacity-30 transition duration-700 group-hover:duration-300"></div>
                 
-                {/* Main card with better styling */}
-                <div className="relative bg-white/90 backdrop-blur-sm rounded-3xl p-6 lg:p-8 text-center cursor-pointer border border-white/30 shadow-lg hover:shadow-2xl transition-all duration-500 service-card overflow-hidden">
-                  {/* Enhanced floating icon with gradient background */}
+                {/* Ultra Enhanced card with premium effects */}
+                <div className="relative bg-white/95 backdrop-blur-lg rounded-3xl p-6 lg:p-8 text-center cursor-pointer border border-white/40 shadow-xl hover:shadow-3xl transition-all duration-700 service-card service-card-3d overflow-hidden">
+                  {/* Premium shimmer effect overlay */}
+                  <div className="absolute inset-0 shimmer opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                  
+                  {/* Ultra Enhanced floating icon with advanced animations */}
                   <motion.div
-                    className="relative mb-6"
-                    whileHover={{ rotate: [0, -5, 5, 0], scale: 1.15 }}
-                    transition={{ duration: 0.6, type: "spring", stiffness: 400 }}
+                    className="relative mb-8"
+                    whileHover={{ 
+                      rotate: [0, -10, 10, -5, 5, 0], 
+                      scale: 1.2,
+                      y: -5
+                    }}
+                    transition={{ duration: 0.8, type: "spring", stiffness: 200 }}
                   >
-                    <div className={`w-24 h-24 rounded-3xl bg-gradient-to-br ${colors.bg} via-white to-${colors.bg} flex items-center justify-center mx-auto shadow-xl group-hover:shadow-2xl transition-all duration-500 border-2 border-white/50 relative overflow-hidden`}>
-                      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/20 to-transparent"></div>
-                      <i className={`${service.icon} text-4xl ${colors.text} group-hover:scale-110 transition-transform duration-300 relative z-10`} />
+                    <div className={`w-28 h-28 rounded-3xl bg-gradient-to-br ${colors.bg} via-white/40 to-${colors.bg} flex items-center justify-center mx-auto shadow-2xl group-hover:shadow-3xl transition-all duration-700 border-2 border-white/60 relative overflow-hidden service-icon-float`}>
+                      {/* Multi-layer gradient overlays */}
+                      <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/30 to-transparent opacity-60"></div>
+                      <div className="absolute inset-0 bg-gradient-to-bl from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                      
+                      {/* Icon with enhanced styling */}
+                      <i className={`${service.icon} text-5xl ${colors.text} group-hover:scale-125 transition-transform duration-700 relative z-10 drop-shadow-xl`} />
+                      
+                      {/* Rotating border effect */}
+                      <div className="absolute inset-1 border-2 border-white/30 rounded-3xl animate-spin-slow opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
                     </div>
                     
-                    {/* Enhanced floating particles effect */}
-                    <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-pulse"></div>
-                    <div className="absolute -bottom-1 -left-1 w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 animate-ping"></div>
-                    <div className="absolute top-0 left-0 w-1.5 h-1.5 bg-yellow-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-800 animate-pulse"></div>
+                    {/* Advanced floating particles with different animations */}
+                    <div className="absolute -top-3 -right-3 w-5 h-5 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 animate-bounce shadow-lg">
+                      <div className="absolute inset-0 bg-white/60 rounded-full animate-ping"></div>
+                    </div>
+                    <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-700 delay-100 animate-float shadow-md"></div>
+                    <div className="absolute top-1 left-1/2 w-3 h-3 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-900 delay-200 animate-pulse shadow-sm"></div>
+                    <div className="absolute bottom-2 right-1/3 w-3.5 h-3.5 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-600 delay-300 animate-bounce shadow-md"></div>
                   </motion.div>
                   
-                  {/* Enhanced Service details */}
-                  <div className="space-y-5">
-                    <h3 className="text-xl lg:text-2xl font-bold text-gray-900 group-hover:text-blue-700 transition-colors duration-300">
+                  {/* Ultra Enhanced Service details with animations */}
+                  <div className="space-y-6 relative z-10">
+                    <motion.h3 
+                      className="text-2xl lg:text-3xl font-bold text-gray-900 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-purple-600 group-hover:bg-clip-text transition-all duration-500"
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.1 }}
+                    >
                       {service.title}
-                    </h3>
-                    <p className="text-gray-600 text-sm lg:text-base leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
-                      {service.shortDescription}
-                    </p>
+                    </motion.h3>
                     
-                    {/* Service highlights */}
-                    <div className="flex items-center justify-center space-x-4 text-xs text-gray-500">
-                      <span className="flex items-center">
-                        <i className="fas fa-star text-yellow-500 mr-1"></i>
-                        Top Rated
+                    <motion.p 
+                      className="text-gray-600 text-base lg:text-lg leading-relaxed group-hover:text-gray-700 transition-colors duration-300 px-4"
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      transition={{ delay: 0.2 }}
+                    >
+                      {service.shortDescription}
+                    </motion.p>
+                    
+                    {/* Enhanced Service highlights with badges */}
+                    <motion.div 
+                      className="flex flex-wrap items-center justify-center gap-3"
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.3 }}
+                    >
+                      <span className="flex items-center bg-yellow-50 text-yellow-700 px-3 py-1 rounded-full text-xs font-medium shadow-sm">
+                        <i className="fas fa-star text-yellow-500 mr-1.5"></i>
+                        5.0 Rated
                       </span>
-                      <span className="flex items-center">
-                        <i className="fas fa-clock text-green-500 mr-1"></i>
+                      <span className="flex items-center bg-green-50 text-green-700 px-3 py-1 rounded-full text-xs font-medium shadow-sm">
+                        <i className="fas fa-clock text-green-500 mr-1.5"></i>
                         24/7 Support
                       </span>
-                    </div>
-                    
-                    {/* Enhanced CTA Button */}
-                    <motion.button
-                      className="w-full bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 text-white px-6 py-4 rounded-2xl font-semibold text-sm shadow-lg hover:shadow-xl transition-all duration-300 transform group-hover:scale-105 relative overflow-hidden"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
-                      <span className="relative z-10">
-                        Explore Service
-                        <i className="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform duration-300"></i>
+                      <span className="flex items-center bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-medium shadow-sm">
+                        <i className="fas fa-shield-alt text-blue-500 mr-1.5"></i>
+                        Secure
                       </span>
+                    </motion.div>
+                    
+                    {/* Ultra Enhanced CTA Button with advanced effects */}
+                    <motion.button
+                      className="w-full bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 text-white px-8 py-5 rounded-2xl font-bold text-base shadow-xl hover:shadow-2xl transition-all duration-500 transform relative overflow-hidden group/btn"
+                      whileHover={{ scale: 1.03, y: -2 }}
+                      whileTap={{ scale: 0.98 }}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.4 }}
+                    >
+                      {/* Multiple animated layers */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-700"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500"></div>
+                      
+                      <span className="relative z-10 flex items-center justify-center">
+                        <span className="mr-2">Explore Service</span>
+                        <i className="fas fa-arrow-right transform group-hover/btn:translate-x-2 transition-transform duration-300"></i>
+                      </span>
+                      
+                      {/* Button particle effects */}
+                      <div className="absolute top-2 right-4 w-1 h-1 bg-white rounded-full opacity-0 group-hover/btn:opacity-70 animate-ping"></div>
+                      <div className="absolute bottom-3 left-6 w-1.5 h-1.5 bg-white/80 rounded-full opacity-0 group-hover/btn:opacity-60 animate-pulse delay-200"></div>
                     </motion.button>
                   </div>
                   
