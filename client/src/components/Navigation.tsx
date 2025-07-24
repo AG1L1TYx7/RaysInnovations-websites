@@ -119,27 +119,27 @@ export default function Navigation() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
                         transition={{ duration: 0.3 }}
-                        className="fixed z-[9999] bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 overflow-hidden"
+                        className="fixed z-[9999] bg-white backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-200 overflow-hidden"
                         style={{ 
-                          top: '70px',
+                          top: '80px',
                           left: '50%',
                           transform: 'translateX(-50%)',
-                          width: 'min(90vw, 1200px)',
-                          maxHeight: '85vh',
+                          width: 'min(85vw, 1100px)',
+                          maxHeight: '80vh',
                           overflowY: 'auto'
                         }}
                         onMouseEnter={() => setIsServicesOpen(true)}
                         onMouseLeave={() => setIsServicesOpen(false)}
                       >
                         {/* Hero Header */}
-                        <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 p-6 text-white relative overflow-hidden">
+                        <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 p-5 text-white relative overflow-hidden">
                           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
                           <div className="relative z-10 text-center">
                             <motion.h3 
                               initial={{ y: 20, opacity: 0 }}
                               animate={{ y: 0, opacity: 1 }}
                               transition={{ delay: 0.1 }}
-                              className="text-2xl font-bold mb-2"
+                              className="text-xl font-bold mb-1"
                             >
                               Premium IT Services
                             </motion.h3>
@@ -147,36 +147,36 @@ export default function Navigation() {
                               initial={{ y: 20, opacity: 0 }}
                               animate={{ y: 0, opacity: 1 }}
                               transition={{ delay: 0.2 }}
-                              className="text-blue-100 text-base"
+                              className="text-blue-100 text-sm"
                             >
                               Transform your business with our comprehensive technology solutions
                             </motion.p>
                           </div>
                           
                           {/* Decorative elements */}
-                          <div className="absolute top-4 right-4 w-20 h-20 bg-white/10 rounded-full blur-xl"></div>
-                          <div className="absolute bottom-4 left-4 w-16 h-16 bg-yellow-400/20 rounded-full blur-lg"></div>
+                          <div className="absolute top-4 right-4 w-16 h-16 bg-white/10 rounded-full blur-xl"></div>
+                          <div className="absolute bottom-4 left-4 w-12 h-12 bg-yellow-400/20 rounded-full blur-lg"></div>
                         </div>
                         
                         {/* Main Content - Centered Services */}
-                        <div className="p-6">
+                        <div className="p-5">
                           <motion.h4 
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.3 }}
-                            className="text-xl font-bold text-gray-900 mb-6 text-center"
+                            className="text-lg font-bold text-gray-900 mb-4 text-center"
                           >
                             All Services
                           </motion.h4>
                           
-                          <div className="flex gap-8">
+                          <div className="flex gap-6">
                             {/* Left Side - Services Grid */}
                             <div className="w-1/2">
-                              <div className="grid grid-cols-2 gap-4 max-w-lg mx-auto">
+                              <div className="grid grid-cols-2 gap-3 max-w-md mx-auto">
                                 {Object.values(SERVICES).map((service, index) => (
                                   <motion.button
                                     key={service.id}
-                                    className={`group relative w-full p-3 rounded-xl border transition-all duration-300 hover:shadow-lg ${
+                                    className={`group relative w-full p-3 rounded-lg border transition-all duration-300 hover:shadow-lg ${
                                       hoveredService === service.id 
                                         ? 'bg-gradient-to-br from-blue-50 to-purple-50 border-blue-300 shadow-md scale-105' 
                                         : 'bg-white hover:bg-gradient-to-br hover:from-blue-50 hover:to-purple-50 border-gray-200 hover:border-blue-300'
@@ -187,10 +187,10 @@ export default function Navigation() {
                                       setIsServicesOpen(false);
                                       scrollToSection('services');
                                     }}
-                                    initial={{ opacity: 0, y: 30 }}
+                                    initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: index * 0.05, duration: 0.5 }}
-                                    whileHover={{ y: -4 }}
+                                    transition={{ delay: index * 0.03, duration: 0.3 }}
+                                    whileHover={{ y: -2 }}
                                     whileTap={{ scale: 0.98 }}
                                   >
                                     {/* Glow effect */}
@@ -198,23 +198,23 @@ export default function Navigation() {
                                     
                                     <div className="relative flex items-center space-x-3 text-left">
                                       {/* Enhanced Icon */}
-                                      <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${getColorClasses(service.color).replace('text-', 'from-')} to-blue-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg relative overflow-hidden flex-shrink-0`}>
+                                      <div className={`w-9 h-9 rounded-lg bg-gradient-to-br ${getColorClasses(service.color).replace('text-', 'from-')} to-blue-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-md relative overflow-hidden flex-shrink-0`}>
                                         <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/20 to-transparent"></div>
                                         <i className={`${service.icon} text-white text-sm relative z-10`} />
                                       </div>
                                       
                                       {/* Service Info */}
                                       <div className="flex-1 min-w-0">
-                                        <h5 className="font-semibold text-gray-900 text-xs mb-1 group-hover:text-blue-700 transition-colors leading-tight">
+                                        <h5 className="font-semibold text-gray-900 text-sm group-hover:text-blue-700 transition-colors leading-tight">
                                           {service.title}
                                         </h5>
-                                        <p className="text-xs text-gray-600 group-hover:text-gray-700 transition-colors line-clamp-1">
+                                        <p className="text-xs text-gray-500 group-hover:text-gray-600 transition-colors line-clamp-1">
                                           {service.shortDescription}
                                         </p>
                                       </div>
                                       
                                       {/* Hover indicator */}
-                                      <div className="w-2 h-2 bg-blue-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse flex-shrink-0"></div>
+                                      <i className="fas fa-chevron-right text-gray-400 group-hover:text-blue-600 text-xs transition-colors"></i>
                                     </div>
                                   </motion.button>
                                 ))}
@@ -231,37 +231,37 @@ export default function Navigation() {
                                     animate={{ opacity: 1, x: 0 }}
                                     exit={{ opacity: 0, x: -20 }}
                                     transition={{ duration: 0.3 }}
-                                    className="w-full bg-gradient-to-br from-blue-50/50 to-purple-50/50 rounded-xl p-6 border border-blue-100"
+                                    className="w-full bg-gradient-to-br from-gray-50 to-blue-50 rounded-xl p-5 border border-gray-200 shadow-inner"
                                   >
                                   {(() => {
                                     const service = SERVICES[hoveredService as keyof typeof SERVICES];
                                     if (!service) return null;
                                     return (
-                                      <div className="space-y-6">
+                                      <div className="space-y-5">
                                         {/* Service Header */}
                                         <div className="flex items-center space-x-4">
-                                          <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${getColorClasses(service.color).replace('text-', 'from-')} to-blue-100 flex items-center justify-center shadow-lg`}>
-                                            <i className={`${service.icon} text-white text-2xl`} />
+                                          <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${getColorClasses(service.color).replace('text-', 'from-')} to-blue-100 flex items-center justify-center shadow-lg`}>
+                                            <i className={`${service.icon} text-white text-xl`} />
                                           </div>
                                           <div>
-                                            <h4 className="font-bold text-gray-900 text-xl">{service.title}</h4>
-                                            <p className="text-gray-600">{service.shortDescription}</p>
+                                            <h4 className="font-bold text-gray-900 text-lg">{service.title}</h4>
+                                            <p className="text-gray-600 text-sm">{service.shortDescription}</p>
                                           </div>
                                         </div>
                                         
                                         {/* Service Description */}
-                                        <p className="text-gray-700 leading-relaxed">{service.description}</p>
+                                        <p className="text-gray-700 leading-relaxed text-sm">{service.description}</p>
                                         
                                         {/* Key Features */}
                                         <div>
-                                          <h5 className="font-semibold text-gray-900 mb-3">Key Features:</h5>
-                                          <div className="space-y-3">
-                                            {service.features.slice(0, 4).map((feature, idx) => (
-                                              <div key={idx} className="flex items-start space-x-3 p-3 bg-white/70 rounded-lg">
-                                                <i className={`${feature.icon} text-blue-600 mt-1`} />
+                                          <h5 className="font-semibold text-gray-900 mb-2 text-sm">Key Features:</h5>
+                                          <div className="space-y-2">
+                                            {service.features.slice(0, 3).map((feature, idx) => (
+                                              <div key={idx} className="flex items-start space-x-2 p-2 bg-white/80 rounded-lg border border-gray-100">
+                                                <i className={`${feature.icon} text-blue-600 mt-0.5 text-sm`} />
                                                 <div>
                                                   <span className="font-medium text-gray-800 text-sm">{feature.title}</span>
-                                                  <p className="text-gray-600 text-xs mt-1 leading-relaxed">{feature.description}</p>
+                                                  <p className="text-gray-600 text-xs mt-0.5 leading-relaxed">{feature.description}</p>
                                                 </div>
                                               </div>
                                             ))}
@@ -299,14 +299,14 @@ export default function Navigation() {
                                   <motion.div
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
-                                    className="w-full h-full flex items-center justify-center text-center bg-gradient-to-br from-gray-50 to-blue-50 rounded-xl border border-gray-100 min-h-[300px]"
+                                    className="w-full h-full flex items-center justify-center text-center bg-gradient-to-br from-gray-50 to-blue-50 rounded-xl border border-gray-200 min-h-[280px]"
                                   >
-                                    <div className="space-y-4">
-                                      <div className="w-20 h-20 mx-auto bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl flex items-center justify-center">
-                                        <i className="fas fa-hand-pointer text-blue-600 text-3xl" />
+                                    <div className="space-y-3">
+                                      <div className="w-16 h-16 mx-auto bg-gradient-to-br from-blue-100 to-purple-100 rounded-xl flex items-center justify-center">
+                                        <i className="fas fa-hand-pointer text-blue-600 text-2xl" />
                                       </div>
-                                      <h4 className="font-bold text-gray-900 text-lg">Discover Our Services</h4>
-                                      <p className="text-gray-600">Hover over any service on the left to see detailed information</p>
+                                      <h4 className="font-bold text-gray-900 text-base">Discover Our Services</h4>
+                                      <p className="text-gray-600 text-sm">Hover over any service on the left to see details</p>
                                     </div>
                                   </motion.div>
                                 )}
