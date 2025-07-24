@@ -211,8 +211,11 @@ export default function Navigation() {
                                           <ul className="space-y-1">
                                             {service.features.slice(0, 4).map((feature, idx) => (
                                               <li key={idx} className="text-xs text-gray-600 flex items-start">
-                                                <span className="text-blue-500 mr-2 mt-0.5">•</span>
-                                                {feature}
+                                                <i className={`fas fa-check text-blue-500 mr-2 mt-0.5 text-xs`} />
+                                                <div>
+                                                  <span className="font-medium text-gray-700">{feature.title}</span>
+                                                  <p className="text-gray-600 mt-0.5 text-xs leading-relaxed">{feature.description}</p>
+                                                </div>
                                               </li>
                                             ))}
                                           </ul>
@@ -250,7 +253,6 @@ export default function Navigation() {
                         </div>
                         
                         <div className="px-6 pb-6">
-                          {/* Service Categories */}
                           {/* Service Categories */}
                           <div className="border-t border-gray-200 pt-6">
                             <h4 className="text-md font-bold text-gray-900 mb-4 text-center">Browse by Category</h4>
