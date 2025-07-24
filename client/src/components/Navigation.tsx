@@ -324,12 +324,7 @@ export default function Navigation() {
                 >
                   Contact
                 </button>
-                <button
-                  onClick={() => setLocation('/client-portal')}
-                  className="text-gray-700 hover:text-primary px-3 py-2 text-sm font-medium transition-colors"
-                >
-                  Client Portal
-                </button>
+
                 <motion.button
                   className="bg-primary text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium"
                   whileHover={{ scale: 1.05 }}
@@ -398,12 +393,7 @@ export default function Navigation() {
                 >
                   Contact
                 </button>
-                <button
-                  onClick={() => setLocation('/client-portal')}
-                  className="block w-full text-left px-3 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
-                >
-                  Client Portal
-                </button>
+
                 <div className="px-3 py-2">
                   <button
                     className="w-full bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium"
