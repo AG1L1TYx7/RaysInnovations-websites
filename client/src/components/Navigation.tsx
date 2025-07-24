@@ -111,7 +111,7 @@ export default function Navigation() {
                     />
                   </button>
                   
-                  {/* Fixed positioned mega menu */}
+                  {/* Absolute positioned mega menu */}
                   <AnimatePresence>
                     {isServicesOpen && (
                       <motion.div
@@ -119,13 +119,13 @@ export default function Navigation() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
                         transition={{ duration: 0.3 }}
-                        className="fixed z-[9999] bg-white backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-200 overflow-hidden"
+                        className="absolute z-[9999] bg-white backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-200 overflow-hidden"
                         style={{ 
-                          top: '80px',
-                          left: '50%',
-                          transform: 'translateX(-50%)',
-                          width: 'min(85vw, 1100px)',
-                          maxHeight: '80vh',
+                          top: 'calc(100% + 8px)',
+                          left: '-100px',
+                          width: '800px',
+                          maxWidth: '85vw',
+                          maxHeight: '75vh',
                           overflowY: 'auto'
                         }}
                         onMouseEnter={() => setIsServicesOpen(true)}
@@ -169,10 +169,7 @@ export default function Navigation() {
                             All Services
                           </motion.h4>
                           
-                          <div className="flex gap-6">
-                            {/* Left Side - Services Grid */}
-                            <div className="w-1/2">
-                              <div className="grid grid-cols-2 gap-3 max-w-md mx-auto">
+                          <div className="grid grid-cols-3 gap-4">
                                 {Object.values(SERVICES).map((service, index) => (
                                   <motion.button
                                     key={service.id}
@@ -218,21 +215,19 @@ export default function Navigation() {
                                     </div>
                                   </motion.button>
                                 ))}
-                              </div>
-                            </div>
+                          </div>
 
-                            {/* Right Side - Service Details Panel */}
-                            <div className="w-1/2 flex items-start">
-                              <AnimatePresence mode="wait">
-                                {hoveredService ? (
-                                  <motion.div
-                                    key={hoveredService}
-                                    initial={{ opacity: 0, x: 20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    exit={{ opacity: 0, x: -20 }}
-                                    transition={{ duration: 0.3 }}
-                                    className="w-full bg-gradient-to-br from-gray-50 to-blue-50 rounded-xl p-5 border border-gray-200 shadow-inner"
-                                  >
+                          {/* Service Details Panel - Below Grid */}
+                          <AnimatePresence mode="wait">
+                            {hoveredService ? (
+                              <motion.div
+                                key={hoveredService}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -20 }}
+                                transition={{ duration: 0.3 }}
+                                className="mt-4 bg-gradient-to-br from-gray-50 to-blue-50 rounded-xl p-4 border border-gray-200"
+                              >
                                   {(() => {
                                     const service = SERVICES[hoveredService as keyof typeof SERVICES];
                                     if (!service) return null;
@@ -299,20 +294,18 @@ export default function Navigation() {
                                   <motion.div
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
-                                    className="w-full h-full flex items-center justify-center text-center bg-gradient-to-br from-gray-50 to-blue-50 rounded-xl border border-gray-200 min-h-[280px]"
+                                    className="mt-4 flex items-center justify-center text-center bg-gradient-to-br from-gray-50 to-blue-50 rounded-xl border border-gray-200 p-8"
                                   >
                                     <div className="space-y-3">
                                       <div className="w-16 h-16 mx-auto bg-gradient-to-br from-blue-100 to-purple-100 rounded-xl flex items-center justify-center">
                                         <i className="fas fa-hand-pointer text-blue-600 text-2xl" />
                                       </div>
                                       <h4 className="font-bold text-gray-900 text-base">Discover Our Services</h4>
-                                      <p className="text-gray-600 text-sm">Hover over any service on the left to see details</p>
+                                      <p className="text-gray-600 text-sm">Hover over any service above to see details</p>
                                     </div>
                                   </motion.div>
                                 )}
                               </AnimatePresence>
-                            </div>
-                          </div>
 
                         {/* Bottom CTA */}
                         <motion.div 
