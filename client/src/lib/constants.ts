@@ -5,6 +5,7 @@ export const SERVICES = {
     shortDescription: 'Cloud infrastructure & migration',
     icon: 'fab fa-aws',
     color: 'orange',
+    category: 'cloud',
     description: 'Optimize your cloud infrastructure with our certified AWS experts and reduce costs by up to 40%',
     image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=400',
     features: [
@@ -37,12 +38,52 @@ export const SERVICES = {
       description: 'Average Savings'
     }
   },
+  azure: {
+    id: 'azure',
+    title: 'Azure Consulting',
+    shortDescription: 'Microsoft cloud solutions',
+    icon: 'fab fa-microsoft',
+    color: 'cyan',
+    category: 'cloud',
+    description: 'Leverage Microsoft Azure for enterprise-grade cloud solutions with seamless integration',
+    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=400',
+    features: [
+      {
+        icon: 'fas fa-cloud',
+        title: 'Azure Migration',
+        description: 'Migrate your infrastructure to Azure with comprehensive planning and minimal downtime.'
+      },
+      {
+        icon: 'fas fa-database',
+        title: 'Data Solutions',
+        description: 'Implement powerful data analytics and storage solutions using Azure services.'
+      },
+      {
+        icon: 'fas fa-lock',
+        title: 'Enterprise Security',
+        description: 'Secure your cloud environment with Azure Active Directory and advanced security features.'
+      }
+    ],
+    benefits: [
+      'Enterprise-grade security and compliance',
+      'Seamless Office 365 integration',
+      'Advanced analytics and AI services',
+      'Hybrid cloud capabilities',
+      'Cost optimization strategies'
+    ],
+    metric: {
+      value: '35%',
+      label: 'reduction in IT costs',
+      description: 'Enterprise Savings'
+    }
+  },
   ai: {
     id: 'ai',
     title: 'AI Development',
     shortDescription: 'Machine learning solutions',
     icon: 'fas fa-brain',
     color: 'purple',
+    category: 'ai',
     description: 'Harness the power of artificial intelligence to automate processes and gain competitive advantages',
     image: 'https://images.unsplash.com/photo-1555255707-c07966088b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=400',
     features: [
@@ -75,12 +116,52 @@ export const SERVICES = {
       description: 'Efficiency Gain'
     }
   },
+  llm: {
+    id: 'llm',
+    title: 'LLM Integration',
+    shortDescription: 'Large Language Models',
+    icon: 'fas fa-language',
+    color: 'indigo',
+    category: 'ai',
+    description: 'Integrate cutting-edge Large Language Models to revolutionize your business operations',
+    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=400',
+    features: [
+      {
+        icon: 'fas fa-microchip',
+        title: 'Custom LLM Solutions',
+        description: 'Develop tailored language models that understand your business domain and terminology.'
+      },
+      {
+        icon: 'fas fa-comments-dollar',
+        title: 'AI-Powered Customer Service',
+        description: 'Create intelligent customer service systems that provide human-like interactions at scale.'
+      },
+      {
+        icon: 'fas fa-file-alt',
+        title: 'Content Generation',
+        description: 'Automate content creation for marketing, documentation, and communication needs.'
+      }
+    ],
+    benefits: [
+      'GPT-4 and Claude integration',
+      'Custom model fine-tuning',
+      'API development and deployment',
+      'Content moderation systems',
+      'Multi-language support'
+    ],
+    metric: {
+      value: '85%',
+      label: 'reduction in content creation time',
+      description: 'Productivity Boost'
+    }
+  },
   web: {
     id: 'web',
     title: 'Web Development',
     shortDescription: 'Custom web applications',
     icon: 'fas fa-code',
     color: 'blue',
+    category: 'development',
     description: 'Create stunning, high-performance web applications that engage users and drive conversions',
     image: 'https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=400',
     features: [
@@ -113,12 +194,52 @@ export const SERVICES = {
       description: 'Avg. Improvement'
     }
   },
+  ecommerce: {
+    id: 'ecommerce',
+    title: 'E-commerce Solutions',
+    shortDescription: 'Online store development',
+    icon: 'fas fa-shopping-cart',
+    color: 'emerald',
+    category: 'development',
+    description: 'Build powerful e-commerce platforms that drive sales and provide exceptional shopping experiences',
+    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=400',
+    features: [
+      {
+        icon: 'fas fa-credit-card',
+        title: 'Payment Integration',
+        description: 'Secure payment processing with multiple gateways and international currency support.'
+      },
+      {
+        icon: 'fas fa-chart-bar',
+        title: 'Analytics & Reporting',
+        description: 'Comprehensive analytics dashboard to track sales, customer behavior, and inventory management.'
+      },
+      {
+        icon: 'fas fa-mobile',
+        title: 'Mobile Commerce',
+        description: 'Responsive design optimized for mobile shopping with progressive web app capabilities.'
+      }
+    ],
+    benefits: [
+      'Multi-channel selling capabilities',
+      'Inventory management systems',
+      'Customer relationship management',
+      'SEO and marketing tools integration',
+      'Performance optimization'
+    ],
+    metric: {
+      value: '250%',
+      label: 'increase in online sales',
+      description: 'Revenue Growth'
+    }
+  },
   mobile: {
     id: 'mobile',
     title: 'App Development',
     shortDescription: 'iOS & Android applications',
     icon: 'fas fa-mobile-alt',
     color: 'green',
+    category: 'development',
     description: 'Build native iOS and Android applications that deliver exceptional user experiences',
     image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=400',
     features: [
@@ -149,6 +270,123 @@ export const SERVICES = {
       value: '95%',
       label: 'apps published successfully',
       description: 'Success Rate'
+    }
+  },
+  devops: {
+    id: 'devops',
+    title: 'DevOps & Infrastructure',
+    shortDescription: 'CI/CD and automation',
+    icon: 'fas fa-infinity',
+    color: 'red',
+    category: 'operations',
+    description: 'Streamline your development lifecycle with modern DevOps practices and automation',
+    image: 'https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=400',
+    features: [
+      {
+        icon: 'fas fa-sync-alt',
+        title: 'CI/CD Pipelines',
+        description: 'Automated testing, building, and deployment pipelines that ensure rapid and reliable software delivery.'
+      },
+      {
+        icon: 'fas fa-container-storage',
+        title: 'Containerization',
+        description: 'Docker and Kubernetes implementation for scalable, portable, and efficient application deployment.'
+      },
+      {
+        icon: 'fas fa-chart-line',
+        title: 'Monitoring & Logging',
+        description: 'Comprehensive monitoring solutions with real-time alerts and detailed logging for optimal performance.'
+      }
+    ],
+    benefits: [
+      'Faster deployment cycles',
+      'Infrastructure as Code (IaC)',
+      'Automated testing and quality assurance',
+      'Scalable container orchestration',
+      '24/7 monitoring and alerting'
+    ],
+    metric: {
+      value: '75%',
+      label: 'faster deployment time',
+      description: 'Speed Improvement'
+    }
+  },
+  cybersecurity: {
+    id: 'cybersecurity',
+    title: 'Cybersecurity',
+    shortDescription: 'Security & compliance',
+    icon: 'fas fa-shield-virus',
+    color: 'slate',
+    category: 'security',
+    description: 'Protect your digital assets with comprehensive cybersecurity solutions and compliance frameworks',
+    image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=400',
+    features: [
+      {
+        icon: 'fas fa-user-shield',
+        title: 'Security Assessment',
+        description: 'Comprehensive security audits and vulnerability assessments to identify and mitigate potential threats.'
+      },
+      {
+        icon: 'fas fa-key',
+        title: 'Identity Management',
+        description: 'Advanced identity and access management solutions with multi-factor authentication and single sign-on.'
+      },
+      {
+        icon: 'fas fa-file-contract',
+        title: 'Compliance Management',
+        description: 'Ensure compliance with GDPR, HIPAA, SOC 2, and other regulatory frameworks through automated monitoring.'
+      }
+    ],
+    benefits: [
+      'Advanced threat detection and response',
+      'Employee security training programs',
+      'Incident response planning',
+      'Regular security assessments',
+      'Compliance reporting and documentation'
+    ],
+    metric: {
+      value: '99.9%',
+      label: 'threat detection accuracy',
+      description: 'Security Score'
+    }
+  },
+  dataanalytics: {
+    id: 'dataanalytics',
+    title: 'Data Analytics',
+    shortDescription: 'Business intelligence & insights',
+    icon: 'fas fa-chart-pie',
+    color: 'amber',
+    category: 'analytics',
+    description: 'Transform raw data into actionable insights with advanced analytics and business intelligence solutions',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=400',
+    features: [
+      {
+        icon: 'fas fa-database',
+        title: 'Data Warehousing',
+        description: 'Design and implement scalable data warehouses that consolidate information from multiple sources.'
+      },
+      {
+        icon: 'fas fa-chart-line',
+        title: 'Business Intelligence',
+        description: 'Create interactive dashboards and reports that provide real-time insights into your business performance.'
+      },
+      {
+        icon: 'fas fa-brain',
+        title: 'Predictive Modeling',
+        description: 'Develop machine learning models that forecast trends and identify opportunities for growth.'
+      }
+    ],
+    benefits: [
+      'Real-time data visualization',
+      'Automated reporting systems',
+      'Customer behavior analysis',
+      'Performance KPI tracking',
+      'Data-driven decision making tools'
+    ],
+    metric: {
+      value: '60%',
+      label: 'improvement in decision speed',
+      description: 'Business Impact'
     }
   }
 };

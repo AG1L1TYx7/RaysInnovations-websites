@@ -96,6 +96,36 @@ export default function ServiceModal({ serviceId, isOpen, onClose }: ServiceModa
         bg: 'bg-green-100',
         text: 'text-green-500',
         border: 'border-green-200'
+      },
+      cyan: {
+        bg: 'bg-cyan-100',
+        text: 'text-cyan-500',
+        border: 'border-cyan-200'
+      },
+      indigo: {
+        bg: 'bg-indigo-100',
+        text: 'text-indigo-500',
+        border: 'border-indigo-200'
+      },
+      emerald: {
+        bg: 'bg-emerald-100',
+        text: 'text-emerald-500',
+        border: 'border-emerald-200'
+      },
+      red: {
+        bg: 'bg-red-100',
+        text: 'text-red-500',
+        border: 'border-red-200'
+      },
+      slate: {
+        bg: 'bg-slate-100',
+        text: 'text-slate-500',
+        border: 'border-slate-200'
+      },
+      amber: {
+        bg: 'bg-amber-100',
+        text: 'text-amber-500',
+        border: 'border-amber-200'
       }
     };
     return colorMap[color as keyof typeof colorMap] || colorMap.blue;

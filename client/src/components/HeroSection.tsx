@@ -48,11 +48,11 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
+          className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight text-shadow"
         >
           Transform Your Business with{' '}
           <motion.span
-            className="text-accent"
+            className="bg-gradient-accent bg-clip-text text-transparent"
             animate={{ scale: [1, 1.05, 1] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           >

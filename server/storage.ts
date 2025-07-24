@@ -56,7 +56,8 @@ export class MemStorage implements IStorage {
       ...insertInquiry, 
       id, 
       createdAt: new Date(),
-      isRead: false 
+      isRead: false,
+      type: insertInquiry.type || 'contact'
     };
     this.inquiries.set(id, inquiry);
     return inquiry;
@@ -88,7 +89,10 @@ export class MemStorage implements IStorage {
       ...insertBooking, 
       id, 
       createdAt: new Date(),
-      status: "pending"
+      status: "pending",
+      description: insertBooking.description || null,
+      preferredDate: insertBooking.preferredDate || null,
+      preferredTime: insertBooking.preferredTime || null
     };
     this.consultationBookings.set(id, booking);
     return booking;

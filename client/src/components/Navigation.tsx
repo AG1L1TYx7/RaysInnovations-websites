@@ -33,9 +33,38 @@ export default function Navigation() {
       orange: 'text-orange-500',
       purple: 'text-purple-500',
       blue: 'text-blue-500',
-      green: 'text-green-500'
+      green: 'text-green-500',
+      cyan: 'text-cyan-500',
+      indigo: 'text-indigo-500',
+      emerald: 'text-emerald-500',
+      red: 'text-red-500',
+      slate: 'text-slate-500',
+      amber: 'text-amber-500'
     };
     return colorMap[color as keyof typeof colorMap] || 'text-blue-500';
+  };
+
+  const serviceCategories = {
+    cloud: {
+      title: 'Cloud Solutions',
+      icon: 'fas fa-cloud',
+      services: Object.values(SERVICES).filter(service => service.category === 'cloud')
+    },
+    ai: {
+      title: 'AI & Analytics',
+      icon: 'fas fa-brain',
+      services: Object.values(SERVICES).filter(service => service.category === 'ai' || service.category === 'analytics')
+    },
+    development: {
+      title: 'Development',
+      icon: 'fas fa-code',
+      services: Object.values(SERVICES).filter(service => service.category === 'development')
+    },
+    operations: {
+      title: 'Operations & Security',
+      icon: 'fas fa-shield-alt',
+      services: Object.values(SERVICES).filter(service => service.category === 'operations' || service.category === 'security')
+    }
   };
 
   return (
@@ -84,23 +113,68 @@ export default function Navigation() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
                         transition={{ duration: 0.3 }}
-                        className="absolute left-0 mt-2 w-96 bg-white rounded-lg shadow-xl border border-gray-100"
+                        className="absolute left-0 mt-2 w-[800px] bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden"
                       >
-                        <div className="p-6">
-                          <div className="grid grid-cols-2 gap-4">
-                            {Object.values(SERVICES).map((service) => (
-                              <motion.button
-                                key={service.id}
-                                className="p-3 rounded-lg hover:bg-gray-50 cursor-pointer transition-all text-left group/item"
-                                onClick={() => scrollToSection('services')}
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
+                        <div className="bg-gradient-to-r from-primary to-blue-700 p-6 text-white">
+                          <h3 className="text-xl font-bold mb-2">Our Services</h3>
+                          <p className="text-blue-100">Comprehensive IT solutions to transform your business</p>
+                        </div>
+                        
+                        <div className="p-8">
+                          <div className="grid grid-cols-2 gap-8">
+                            {Object.entries(serviceCategories).map(([categoryId, category]) => (
+                              <motion.div
+                                key={categoryId}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: Object.keys(serviceCategories).indexOf(categoryId) * 0.1 }}
+                                className="space-y-4"
                               >
-                                <i className={`${service.icon} text-2xl ${getColorClasses(service.color)} mb-2 group-hover/item:scale-110 transition-transform`} />
-                                <h3 className="font-semibold text-gray-900 mb-1">{service.title}</h3>
-                                <p className="text-sm text-gray-600">{service.shortDescription}</p>
-                              </motion.button>
+                                <div className="flex items-center mb-4">
+                                  <div className="bg-primary bg-opacity-10 p-2 rounded-lg mr-3">
+                                    <i className={`${category.icon} text-primary text-lg`} />
+                                  </div>
+                                  <h4 className="font-bold text-gray-900 text-lg">{category.title}</h4>
+                                </div>
+                                
+                                <div className="space-y-2">
+                                  {category.services.map((service) => (
+                                    <motion.button
+                                      key={service.id}
+                                      className="w-full p-3 rounded-lg hover:bg-gray-50 cursor-pointer transition-all text-left group/item border border-transparent hover:border-gray-200"
+                                      onClick={() => scrollToSection('services')}
+                                      whileHover={{ x: 5 }}
+                                      whileTap={{ scale: 0.98 }}
+                                    >
+                                      <div className="flex items-center">
+                                        <i className={`${service.icon} ${getColorClasses(service.color)} mr-3 group-hover/item:scale-110 transition-transform`} />
+                                        <div>
+                                          <h5 className="font-semibold text-gray-900 text-sm mb-1">{service.title}</h5>
+                                          <p className="text-xs text-gray-600">{service.shortDescription}</p>
+                                        </div>
+                                      </div>
+                                    </motion.button>
+                                  ))}
+                                </div>
+                              </motion.div>
                             ))}
+                          </div>
+                          
+                          <div className="mt-8 pt-6 border-t border-gray-200">
+                            <div className="flex items-center justify-between">
+                              <div>
+                                <h4 className="font-semibold text-gray-900 mb-1">Need Custom Solutions?</h4>
+                                <p className="text-sm text-gray-600">Let's discuss your specific requirements</p>
+                              </div>
+                              <motion.button
+                                className="bg-accent text-white px-6 py-2 rounded-lg hover:bg-yellow-600 transition-colors font-medium"
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                onClick={() => scrollToSection('contact')}
+                              >
+                                Get Started
+                              </motion.button>
+                            </div>
                           </div>
                         </div>
                       </motion.div>
