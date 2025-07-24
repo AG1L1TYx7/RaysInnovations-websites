@@ -1,6 +1,6 @@
-# Rays Innovations - IT Consulting Website
+# Rays Innovations - Static Website
 
-A modern, static website for Rays Innovations, an IT consulting company offering AWS cloud solutions, AI development, web/mobile app development, and comprehensive IT services. This is a pure frontend application with no backend dependencies.
+A modern, static website for Rays Innovations, an IT consulting company offering AWS cloud solutions, AI development, web/mobile app development, and comprehensive IT services. This is a pure frontend application built with React and TypeScript.
 
 ## 🚀 Features
 

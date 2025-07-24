@@ -10,12 +10,14 @@ Preferred communication style: Simple, everyday language.
 
 ## System Architecture
 
-The application is a static single-page application (SPA):
+The application is a pure static single-page application (SPA) with no backend:
 
 - **Frontend**: React + TypeScript with Vite as the build tool
 - **UI Framework**: Tailwind CSS with shadcn/ui components
 - **Routing**: Client-side routing with Wouter
-- **Deployment**: Static site that can be hosted on any static hosting service
+- **Contact Forms**: Uses mailto links to open user's email client
+- **Deployment**: Static site that can be hosted on any static hosting service (Netlify, Vercel, GitHub Pages, etc.)
+- **No Backend**: All backend files removed - pure frontend only
 
 ## Key Components
 
