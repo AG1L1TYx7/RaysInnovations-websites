@@ -119,14 +119,15 @@ export default function Navigation() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
                         transition={{ duration: 0.3 }}
-                        className="fixed left-4 right-4 mt-2 bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden z-[9999] mx-auto max-w-7xl"
+                        className="fixed bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden z-[9999]"
                         style={{ 
                           maxHeight: '85vh',
                           overflowY: 'auto',
                           top: '64px',
                           left: '50%',
                           transform: 'translateX(-50%)',
-                          width: 'min(95vw, 1400px)'
+                          width: 'min(95vw, 1400px)',
+                          maxWidth: '1400px'
                         }}
                         onMouseEnter={() => setIsServicesOpen(true)}
                         onMouseLeave={() => setIsServicesOpen(false)}
@@ -137,16 +138,16 @@ export default function Navigation() {
                         </div>
                         
                         <div className="flex">
-                          {/* Left Side - Services Grid */}
-                          <div className="w-2/3 p-6 border-r border-gray-200">
+                          {/* Left Side - Services Grid - Perfectly Centered */}
+                          <div className="w-2/3 p-6 border-r border-gray-200 flex flex-col">
                             <h4 className="text-lg font-bold text-gray-900 mb-6 text-center">All Our Services</h4>
-                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 md:gap-4">
+                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 md:gap-4 justify-items-center mx-auto max-w-4xl">
                               {Object.values(SERVICES).map((service, index) => (
                                 <motion.button
                                   key={service.id}
-                                  className={`group p-3 md:p-4 rounded-xl border transition-all text-center hover:shadow-lg ${
+                                  className={`group p-3 md:p-4 rounded-xl border transition-all text-center hover:shadow-lg w-full max-w-[140px] ${
                                     hoveredService === service.id 
-                                      ? 'bg-gradient-to-br from-blue-50 to-purple-50 border-blue-300 shadow-md' 
+                                      ? 'bg-gradient-to-br from-blue-50 to-purple-50 border-blue-300 shadow-md transform scale-105' 
                                       : 'hover:bg-gradient-to-br hover:from-blue-50 hover:to-purple-50 border-gray-100 hover:border-blue-200'
                                   }`}
                                   onMouseEnter={() => setHoveredService(service.id)}
