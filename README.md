@@ -116,7 +116,7 @@ vercel --prod
 
 ```
 rays-innovations/
-├── client/                 # Frontend React application
+├── client/                 # React application
 │   ├── src/
 │   │   ├── components/    # Reusable UI components
 │   │   ├── pages/        # Page components
@@ -130,7 +130,10 @@ rays-innovations/
 ├── vite.config.ts       # Vite configuration
 ├── tailwind.config.ts   # Tailwind CSS configuration
 ├── tsconfig.json        # TypeScript configuration
-└── package.json         # Project dependencies
+├── package.json         # Project dependencies
+├── netlify.toml         # Netlify deployment config
+├── vercel.json          # Vercel deployment config
+└── build-static.sh      # Build script
 ```
 
 ## 📝 Available Scripts
