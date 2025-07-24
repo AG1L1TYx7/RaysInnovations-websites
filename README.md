@@ -1,42 +1,35 @@
 # Rays Innovations - IT Consulting Website
 
-A modern, full-stack web application for Rays Innovations, an IT consulting company offering AWS cloud solutions, AI development, web/mobile app development, and comprehensive IT services.
+A modern, static website for Rays Innovations, an IT consulting company offering AWS cloud solutions, AI development, web/mobile app development, and comprehensive IT services. This is a pure frontend application with no backend dependencies.
 
 ## 🚀 Features
 
 - **Professional Business Website**: Modern design with animations and interactive elements
 - **Service Showcase**: 10 comprehensive IT services with detailed descriptions
 - **Interactive Mega Menu**: Categorized service navigation with hover effects
-- **Contact System**: Form submissions with database storage
-- **Consultation Booking**: Service-specific consultation requests
-- **Blog Section**: SEO-optimized content for thought leadership
+- **Contact System**: Email integration via mailto links
+- **Consultation Booking**: Direct email consultation requests
+- **Blog Section**: SEO-optimized static content
 - **Legal Pages**: Privacy Policy, Terms of Service, and Cookie Policy
 - **Responsive Design**: Optimized for all device sizes
 - **SEO Optimized**: Meta tags, structured data, and semantic HTML
+- **Static Deployment**: Can be hosted on any static hosting service
 
 ## 🛠️ Tech Stack
 
-### Frontend
 - **React 18** with TypeScript
 - **Vite** for fast development and building
 - **Tailwind CSS** for styling
 - **shadcn/ui** components (built on Radix UI)
 - **Framer Motion** for animations
-- **Wouter** for routing
-- **TanStack Query** for server state management
+- **Wouter** for client-side routing
 - **React Hook Form** with Zod validation
-
-### Backend
-- **Express.js** with TypeScript
-- **PostgreSQL** database (Neon serverless)
-- **Drizzle ORM** for type-safe database queries
-- **Zod** for schema validation
+- **Font Awesome** for icons
 
 ## 📋 Prerequisites
 
 - Node.js 18.x or higher
 - npm or yarn package manager
-- PostgreSQL database (local or cloud)
 
 ## 🔧 Installation
 
@@ -51,89 +44,73 @@ A modern, full-stack web application for Rays Innovations, an IT consulting comp
    npm install
    ```
 
-3. **Set up environment variables**
-   
-   Create a `.env` file in the root directory. Here's the complete template:
-   
-   ```env
-   # ==============================================
-   # BASIC CONFIGURATION (Required)
-   # ==============================================
-   
-   # Server Configuration
-   PORT=5000
-   NODE_ENV=development
-   
-   # ==============================================
-   # DATABASE CONFIGURATION
-   # ==============================================
-   
-   # Option 1: Development with In-Memory Storage
-   # Leave DATABASE_URL commented out to use in-memory storage (no database required)
-   
-   # Option 2: Local PostgreSQL
-   # DATABASE_URL=postgresql://postgres:your_password@localhost:5432/rays_innovations
-   
-   # Option 3: Neon Serverless PostgreSQL (Recommended for Production)
-   # Sign up at https://neon.tech for a free account
-   # DATABASE_URL=postgresql://username:password@host.neon.tech/dbname?sslmode=require
-   
-   # Example Neon connection string:
-   # DATABASE_URL=postgresql://user:pass@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require
-   
-   # ==============================================
-   # OPTIONAL CONFIGURATIONS
-   # ==============================================
-   
-   # Session Secret (auto-generated if not provided)
-   # SESSION_SECRET=your-super-secret-session-key-here
-   
-   # PostgreSQL Individual Components (extracted automatically from DATABASE_URL)
-   # PGHOST=localhost
-   # PGPORT=5432
-   # PGUSER=postgres
-   # PGPASSWORD=your_password
-   # PGDATABASE=rays_innovations
-   ```
-   
-   **Quick Start for Development:**
-   - For quick development without a database, just create `.env` with:
-     ```env
-     PORT=5000
-     NODE_ENV=development
-     ```
-   - The app will use in-memory storage automatically
-   
-   **Using the Template:**
-   - A complete `.env.example` file is provided in the repository
-   - Copy it to create your `.env` file:
-     ```bash
-     cp .env.example .env
-     ```
-   - Then edit `.env` with your actual values
-
-4. **Set up the database**
-   
-   The application uses Drizzle ORM with PostgreSQL. Run the following command to push the schema to your database:
-   ```bash
-   npm run db:push
-   ```
-
-## 🏃‍♂️ Running Locally
-
-1. **Start the development server**
+3. **Start the development server**
    ```bash
    npm run dev
    ```
    
-   This will start:
-   - Backend server on `http://localhost:5000`
-   - Frontend development server with hot reload
-   - All API routes available at `/api/*`
+   The application will be running at http://localhost:5173
 
-2. **Access the application**
+## 🏗️ Building for Production
+
+1. **Build the static site**
+   ```bash
+   npm run build
+   ```
    
-   Open your browser and navigate to `http://localhost:5000`
+   This will create a `dist` directory with all static files.
+
+2. **Preview the production build**
+   ```bash
+   npm run preview
+   ```
+
+## 🚀 Deployment
+
+### Quick Build
+```bash
+./build-static.sh
+```
+
+This script will install dependencies and build the static site.
+
+### Deployment Options
+
+The built static site in the `dist` directory can be deployed to any static hosting service:
+
+#### Netlify
+1. Build the site: `npm run build`
+2. Go to [app.netlify.com](https://app.netlify.com)
+3. Drag and drop the `dist` folder
+
+Or use the included `netlify.toml` configuration:
+```bash
+# Install Netlify CLI
+npm install -g netlify-cli
+
+# Deploy
+netlify deploy --prod --dir=dist
+```
+
+#### Vercel
+Using the included `vercel.json` configuration:
+```bash
+# Install Vercel CLI
+npm install -g vercel
+
+# Deploy
+vercel --prod
+```
+
+#### GitHub Pages
+1. Build the site: `npm run build`
+2. Push to GitHub
+3. Enable GitHub Pages in repository settings
+4. Set source to the `dist` directory
+
+#### Other Options
+- **AWS S3 + CloudFront**: Upload the `dist` folder to S3
+- **Any web server**: Upload the `dist` folder contents to your server
 
 ## 📁 Project Structure
 
@@ -148,114 +125,19 @@ rays-innovations/
 │   │   └── App.tsx       # Main app component
 │   └── index.html        # Entry HTML file
 │
-├── server/                # Backend Express application
-│   ├── index.ts          # Server entry point
-│   ├── routes.ts         # API route definitions
-│   ├── storage.ts        # Storage interface & implementation
-│   ├── db.ts            # Database connection
-│   └── vite.ts          # Vite integration for production
-│
-├── shared/               # Shared types and schemas
-│   └── schema.ts        # Drizzle schema definitions
-│
-├── drizzle.config.ts    # Drizzle ORM configuration
+├── attached_assets/      # Images and other assets
+├── dist/                 # Production build output (created after build)
 ├── vite.config.ts       # Vite configuration
 ├── tailwind.config.ts   # Tailwind CSS configuration
 ├── tsconfig.json        # TypeScript configuration
 └── package.json         # Project dependencies
 ```
 
-## 💾 Database Information
-
-### Database Schema
-
-The application stores data in PostgreSQL with the following tables:
-
-1. **users** - User information (currently unused in frontend)
-   - id (varchar, primary key)
-   - email (varchar, unique)
-   - firstName (varchar)
-   - lastName (varchar)
-   - profileImageUrl (varchar)
-   - createdAt (timestamp)
-   - updatedAt (timestamp)
-
-2. **inquiries** - Contact form submissions
-   - id (serial, primary key)
-   - name (varchar)
-   - email (varchar)
-   - phone (varchar, optional)
-   - message (text)
-   - serviceType (varchar) - Selected service category
-   - createdAt (timestamp)
-
-3. **consultation_bookings** - Consultation requests
-   - id (serial, primary key)
-   - name (varchar)
-   - email (varchar)
-   - phone (varchar)
-   - company (varchar, optional)
-   - serviceId (varchar) - Specific service requested
-   - serviceTitle (varchar)
-   - projectDescription (text)
-   - budget (varchar, optional)
-   - timeline (varchar, optional)
-   - preferredContactMethod (varchar)
-   - preferredTimeSlot (varchar, optional)
-   - createdAt (timestamp)
-
-### Database Location
-
-- **Development**: Uses in-memory storage by default (MemStorage class) if DATABASE_URL is not set
-- **Production**: Requires PostgreSQL database connection via DATABASE_URL environment variable
-- **Recommended**: Use Neon serverless PostgreSQL for easy setup and scalability
-
-### Setting up Neon Database (Recommended)
-
-1. Sign up at [neon.tech](https://neon.tech)
-2. Create a new project
-3. Copy the connection string
-4. Add it to your `.env` file as `DATABASE_URL`
-
-## 🚀 Building for Production
-
-1. **Build the application**
-   ```bash
-   npm run build
-   ```
-   
-   This creates:
-   - Optimized frontend assets in `dist/public/`
-   - Compiled backend code in `dist/`
-
-2. **Run in production**
-   ```bash
-   npm start
-   ```
-
-## 🔒 Environment Variables
-
-### Required for Production
-- `DATABASE_URL` - PostgreSQL connection string
-- `NODE_ENV` - Set to "production"
-
-### Optional
-- `PORT` - Server port (default: 5000)
-- `SESSION_SECRET` - For session management (auto-generated if not provided)
-
 ## 📝 Available Scripts
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm start` - Run production server
-- `npm run db:push` - Push database schema changes
-- `npm run db:studio` - Open Drizzle Studio for database management
-
-## 🤝 API Endpoints
-
-- `POST /api/contact` - Submit contact form
-- `POST /api/consultation` - Book a consultation
-- `GET /api/health` - Health check endpoint
+- `npm run dev` - Start development server at http://localhost:5173
+- `npm run build` - Build static site for production
+- `npm run preview` - Preview production build locally
 
 ## 🎨 Customization
 
@@ -278,19 +160,13 @@ Edit the relevant components in `client/src/components/`:
 
 ## 🐛 Troubleshooting
 
-### Database Connection Issues
-- Ensure PostgreSQL is running
-- Verify DATABASE_URL is correct
-- Check network connectivity for cloud databases
-- Run `npm run db:push` to ensure schema is up to date
-
 ### Build Errors
 - Clear node_modules and reinstall: `rm -rf node_modules && npm install`
 - Ensure Node.js version is 18.x or higher
 - Check for TypeScript errors: `npx tsc --noEmit`
 
 ### Development Server Issues
-- Check if port 5000 is available
+- Check if port 5173 is available
 - Clear Vite cache: `rm -rf node_modules/.vite`
 - Restart the development server
 

@@ -8,8 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation } from '@tanstack/react-query';
-import { apiRequest } from '@/lib/queryClient';
+// Removed backend dependencies
 import { useToast } from '@/hooks/use-toast';
 import { SERVICES } from '@/lib/constants';
 import { z } from 'zod';
@@ -47,30 +46,21 @@ export default function ServiceModal({ serviceId, isOpen, onClose }: ServiceModa
     },
   });
 
-  const bookingMutation = useMutation({
-    mutationFn: async (data: ConsultationForm) => {
-      return apiRequest('POST', '/api/consultation', data);
-    },
-    onSuccess: () => {
-      toast({
-        title: 'Consultation Booked!',
-        description: 'We\'ll contact you within 24 hours to confirm the details.',
-      });
-      form.reset();
-      setActiveTab('overview');
-      onClose();
-    },
-    onError: (error: any) => {
-      toast({
-        title: 'Booking Failed',
-        description: error.message || 'Something went wrong. Please try again.',
-        variant: 'destructive',
-      });
-    },
-  });
-
   const onSubmit = (data: ConsultationForm) => {
-    bookingMutation.mutate(data);
+    // Show success message for static site
+    toast({
+      title: 'Thank You!',
+      description: 'Please email us at contact@raysinnovations.com to schedule your consultation.',
+    });
+    
+    // Create mailto link with consultation data
+    const subject = `Consultation Request for ${data.service}`;
+    const body = `Name: ${data.name}%0D%0AEmail: ${data.email}%0D%0APhone: ${data.phone}%0D%0AService: ${data.service}%0D%0A%0D%0ADetails:%0D%0A${data.description}`;
+    window.location.href = `mailto:contact@raysinnovations.com?subject=${subject}&body=${body}`;
+    
+    form.reset();
+    setActiveTab('overview');
+    onClose();
   };
 
   if (!service) return null;
@@ -330,9 +320,8 @@ export default function ServiceModal({ serviceId, isOpen, onClose }: ServiceModa
                       <Button
                         type="submit"
                         className="w-full bg-accent hover:bg-yellow-600 text-white font-semibold py-3"
-                        disabled={bookingMutation.isPending}
                       >
-                        {bookingMutation.isPending ? 'Booking...' : 'Book Free Consultation'}
+                        Book Free Consultation
                       </Button>
                     </form>
                   </Form>

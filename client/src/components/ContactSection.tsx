@@ -6,8 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation } from '@tanstack/react-query';
-import { apiRequest } from '@/lib/queryClient';
+// Removed backend dependencies
 import { useToast } from '@/hooks/use-toast';
 import { SERVICES } from '@/lib/constants';
 import { z } from 'zod';
@@ -38,28 +37,19 @@ export default function ContactSection() {
     },
   });
 
-  const contactMutation = useMutation({
-    mutationFn: async (data: ContactForm) => {
-      return apiRequest('POST', '/api/contact', data);
-    },
-    onSuccess: () => {
-      toast({
-        title: 'Message Sent!',
-        description: 'Thank you for your message. We\'ll get back to you soon.',
-      });
-      form.reset();
-    },
-    onError: (error: any) => {
-      toast({
-        title: 'Failed to Send Message',
-        description: error.message || 'Something went wrong. Please try again.',
-        variant: 'destructive',
-      });
-    },
-  });
-
   const onSubmit = (data: ContactForm) => {
-    contactMutation.mutate(data);
+    // Show success message for static site
+    toast({
+      title: 'Thank You!',
+      description: 'Please email us at contact@raysinnovations.com with your inquiry.',
+    });
+    
+    // Create mailto link with form data
+    const subject = `Inquiry about ${data.service}`;
+    const body = `Name: ${data.firstName} ${data.lastName}%0D%0AEmail: ${data.email}%0D%0APhone: ${data.phone}%0D%0AService: ${data.service}%0D%0A%0D%0AMessage:%0D%0A${data.message}`;
+    window.location.href = `mailto:contact@raysinnovations.com?subject=${subject}&body=${body}`;
+    
+    form.reset();
   };
 
   const contactInfo = [
@@ -236,9 +226,8 @@ export default function ContactSection() {
                 <Button
                   type="submit"
                   className="w-full bg-primary hover:bg-blue-700 text-white font-semibold py-3"
-                  disabled={contactMutation.isPending}
                 >
-                  {contactMutation.isPending ? 'Sending...' : 'Send Message'}
+                  Send Message
                 </Button>
               </form>
             </Form>
