@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertInquirySchema, insertConsultationBookingSchema } from "@shared/schema";
+import { insertInquirySchema, insertConsultationBookingSchema, insertProjectCommentSchema } from "@shared/schema";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -118,6 +118,77 @@ export async function registerRoutes(app: Express): Promise<Server> {
         success: false, 
         message: "Failed to fetch consultation bookings" 
       });
+    }
+  });
+
+  // Client Portal API routes
+  app.get("/api/projects", async (req, res) => {
+    try {
+      const clientId = req.query.clientId ? parseInt(req.query.clientId as string) : undefined;
+      const projects = await storage.getProjects(clientId);
+      res.json(projects);
+    } catch (error) {
+      console.error("Error fetching projects:", error);
+      res.status(500).json({ message: "Failed to fetch projects" });
+    }
+  });
+
+  app.get("/api/projects/:id", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const project = await storage.getProject(id);
+      if (!project) {
+        return res.status(404).json({ message: "Project not found" });
+      }
+      res.json(project);
+    } catch (error) {
+      console.error("Error fetching project:", error);
+      res.status(500).json({ message: "Failed to fetch project" });
+    }
+  });
+
+  app.get("/api/tasks", async (req, res) => {
+    try {
+      const projectId = req.query.projectId ? parseInt(req.query.projectId as string) : undefined;
+      const tasks = await storage.getTasks(projectId);
+      res.json(tasks);
+    } catch (error) {
+      console.error("Error fetching tasks:", error);
+      res.status(500).json({ message: "Failed to fetch tasks" });
+    }
+  });
+
+  app.get("/api/time-entries", async (req, res) => {
+    try {
+      const projectId = req.query.projectId ? parseInt(req.query.projectId as string) : undefined;
+      const userId = req.query.userId ? parseInt(req.query.userId as string) : undefined;
+      const timeEntries = await storage.getTimeEntries(projectId, userId);
+      res.json(timeEntries);
+    } catch (error) {
+      console.error("Error fetching time entries:", error);
+      res.status(500).json({ message: "Failed to fetch time entries" });
+    }
+  });
+
+  app.get("/api/project-comments/:projectId", async (req, res) => {
+    try {
+      const projectId = parseInt(req.params.projectId);
+      const comments = await storage.getProjectComments(projectId);
+      res.json(comments);
+    } catch (error) {
+      console.error("Error fetching project comments:", error);
+      res.status(500).json({ message: "Failed to fetch project comments" });
+    }
+  });
+
+  app.post("/api/project-comments", async (req, res) => {
+    try {
+      const validatedData = insertProjectCommentSchema.parse(req.body);
+      const comment = await storage.createProjectComment(validatedData);
+      res.status(201).json(comment);
+    } catch (error) {
+      console.error("Error creating project comment:", error);
+      res.status(500).json({ message: "Failed to create project comment" });
     }
   });
 
