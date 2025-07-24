@@ -53,18 +53,64 @@ A modern, full-stack web application for Rays Innovations, an IT consulting comp
 
 3. **Set up environment variables**
    
-   Create a `.env` file in the root directory:
-   ```env
-   # Database Configuration
-   DATABASE_URL=postgresql://username:password@localhost:5432/rays_innovations
+   Create a `.env` file in the root directory. Here's the complete template:
    
-   # Or use Neon serverless PostgreSQL
-   # DATABASE_URL=postgresql://username:password@host.neon.tech/dbname?sslmode=require
+   ```env
+   # ==============================================
+   # BASIC CONFIGURATION (Required)
+   # ==============================================
    
    # Server Configuration
    PORT=5000
    NODE_ENV=development
+   
+   # ==============================================
+   # DATABASE CONFIGURATION
+   # ==============================================
+   
+   # Option 1: Development with In-Memory Storage
+   # Leave DATABASE_URL commented out to use in-memory storage (no database required)
+   
+   # Option 2: Local PostgreSQL
+   # DATABASE_URL=postgresql://postgres:your_password@localhost:5432/rays_innovations
+   
+   # Option 3: Neon Serverless PostgreSQL (Recommended for Production)
+   # Sign up at https://neon.tech for a free account
+   # DATABASE_URL=postgresql://username:password@host.neon.tech/dbname?sslmode=require
+   
+   # Example Neon connection string:
+   # DATABASE_URL=postgresql://user:pass@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require
+   
+   # ==============================================
+   # OPTIONAL CONFIGURATIONS
+   # ==============================================
+   
+   # Session Secret (auto-generated if not provided)
+   # SESSION_SECRET=your-super-secret-session-key-here
+   
+   # PostgreSQL Individual Components (extracted automatically from DATABASE_URL)
+   # PGHOST=localhost
+   # PGPORT=5432
+   # PGUSER=postgres
+   # PGPASSWORD=your_password
+   # PGDATABASE=rays_innovations
    ```
+   
+   **Quick Start for Development:**
+   - For quick development without a database, just create `.env` with:
+     ```env
+     PORT=5000
+     NODE_ENV=development
+     ```
+   - The app will use in-memory storage automatically
+   
+   **Using the Template:**
+   - A complete `.env.example` file is provided in the repository
+   - Copy it to create your `.env` file:
+     ```bash
+     cp .env.example .env
+     ```
+   - Then edit `.env` with your actual values
 
 4. **Set up the database**
    
