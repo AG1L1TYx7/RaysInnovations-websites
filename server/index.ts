@@ -9,8 +9,9 @@ async function startServer() {
     root: path.resolve(process.cwd(), 'client'),
     server: {
       port: PORT,
-      host: '0.0.0.0',
+      host: true,
       strictPort: true,
+      allowedHosts: 'all',
     },
     resolve: {
       alias: {
