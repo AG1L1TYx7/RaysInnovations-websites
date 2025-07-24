@@ -118,10 +118,14 @@ export default function Navigation() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
                         transition={{ duration: 0.3 }}
-                        className="absolute left-0 mt-2 w-[95vw] max-w-6xl bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden z-[9999]"
+                        className="fixed left-4 right-4 mt-2 bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden z-[9999] mx-auto max-w-7xl"
                         style={{ 
                           maxHeight: '85vh',
-                          overflowY: 'auto'
+                          overflowY: 'auto',
+                          top: '64px',
+                          left: '50%',
+                          transform: 'translateX(-50%)',
+                          width: 'min(95vw, 1200px)'
                         }}
                         onMouseEnter={() => setIsServicesOpen(true)}
                         onMouseLeave={() => setIsServicesOpen(false)}
@@ -135,11 +139,11 @@ export default function Navigation() {
                           {/* All Services Grid */}
                           <div className="mb-8">
                             <h4 className="text-lg font-bold text-gray-900 mb-6 text-center">All Our Services</h4>
-                            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4">
                               {Object.values(SERVICES).map((service, index) => (
                                 <motion.button
                                   key={service.id}
-                                  className="group p-4 rounded-xl hover:bg-gradient-to-br hover:from-blue-50 hover:to-purple-50 border border-gray-100 hover:border-blue-200 cursor-pointer transition-all text-center hover:shadow-lg"
+                                  className="group p-3 md:p-4 rounded-xl hover:bg-gradient-to-br hover:from-blue-50 hover:to-purple-50 border border-gray-100 hover:border-blue-200 cursor-pointer transition-all text-center hover:shadow-lg"
                                   onClick={() => setLocation('/services')}
                                   initial={{ opacity: 0, y: 20 }}
                                   animate={{ opacity: 1, y: 0 }}
@@ -147,13 +151,13 @@ export default function Navigation() {
                                   whileHover={{ y: -2, scale: 1.02 }}
                                   whileTap={{ scale: 0.98 }}
                                 >
-                                  <div className="flex flex-col items-center space-y-3">
-                                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${getColorClasses(service.color).replace('text-', 'from-')} to-blue-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
-                                      <i className={`${service.icon} text-white text-lg`} />
+                                  <div className="flex flex-col items-center space-y-2 md:space-y-3">
+                                    <div className={`w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-br ${getColorClasses(service.color).replace('text-', 'from-')} to-blue-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                                      <i className={`${service.icon} text-white text-sm md:text-lg`} />
                                     </div>
                                     <div>
-                                      <h5 className="font-semibold text-gray-900 text-sm mb-1 group-hover:text-blue-700 transition-colors">{service.title}</h5>
-                                      <p className="text-xs text-gray-600 line-clamp-2 group-hover:text-gray-700 transition-colors">{service.shortDescription}</p>
+                                      <h5 className="font-semibold text-gray-900 text-xs md:text-sm mb-1 group-hover:text-blue-700 transition-colors">{service.title}</h5>
+                                      <p className="text-xs text-gray-600 line-clamp-2 group-hover:text-gray-700 transition-colors hidden md:block">{service.shortDescription}</p>
                                     </div>
                                   </div>
                                 </motion.button>

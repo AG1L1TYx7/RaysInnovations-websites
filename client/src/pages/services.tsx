@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLocation } from 'wouter';
 import { SERVICES } from '@/lib/constants';
 import ServiceModal from '@/components/ServiceModal';
 
@@ -57,6 +58,7 @@ const ServiceCategories = () => {
 export default function ServicesPage() {
   const [selectedService, setSelectedService] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState<string>('all');
+  const [, setLocation] = useLocation();
   const categories = ServiceCategories();
 
   const filteredServices = activeCategory === 'all' 
@@ -97,14 +99,28 @@ export default function ServicesPage() {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="inline-block px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full text-sm font-medium mb-8 shadow-lg"
-            >
-              ⚡ Complete IT Services Portfolio
-            </motion.div>
+            <div className="flex items-center justify-center mb-8">
+              <motion.button
+                onClick={() => setLocation('/')}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                className="mr-4 px-4 py-2 bg-white text-blue-600 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex items-center space-x-2 border border-blue-200 hover:border-blue-300"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <i className="fas fa-arrow-left" />
+                <span>Back to Home</span>
+              </motion.button>
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="inline-block px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full text-sm font-medium shadow-lg"
+              >
+                ⚡ Complete IT Services Portfolio
+              </motion.div>
+            </div>
             <h1 className="text-6xl font-bold bg-gradient-to-r from-gray-900 via-blue-800 to-gray-900 bg-clip-text text-transparent mb-8 leading-tight">
               Our Premium Services
             </h1>
