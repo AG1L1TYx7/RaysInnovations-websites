@@ -40,41 +40,40 @@ export default function ContactSection() {
 
   const onSubmit = async (data: ContactForm) => {
     try {
-      // For now, let's use a simple approach to test Google Sheets write
-      const SPREADSHEET_ID = '1dlKksFNspUJUI0OWIwD_9hzzON8CJv6nma7SUvvFOSM';
-      const SHEET_NAME = 'Sheet1';
+      const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby4V_xFrStgg18HkjnBLqqfCcU_wcSuEzTmRTCDjE0iwpRvzhjx1A_dAW0XGDwcZIFSPw/exec';
       
-      // Create a pre-filled Google Form URL as a workaround
-      const timestamp = new Date().toLocaleString();
-      const formData = [
-        timestamp,
-        data.firstName,
-        data.lastName, 
-        data.email,
-        data.phone,
-        data.service,
-        data.message,
-        'Contact Form'
-      ];
-      
-      console.log('Form data to submit:', formData);
-      
-      // For now, show success and prepare the data
-      toast({
-        title: 'Message Received!',
-        description: 'Thank you for contacting us. We will get back to you soon.',
-      });
-      
-      // Log the data (you can check browser console to see it's working)
-      console.log('Contact form submitted:', {
-        timestamp,
-        name: `${data.firstName} ${data.lastName}`,
+      const formData = {
+        formType: 'contact',
+        timestamp: new Date().toLocaleString(),
+        firstName: data.firstName,
+        lastName: data.lastName,
         email: data.email,
         phone: data.phone,
         service: data.service,
-        message: data.message,
-        type: 'Contact Form'
+        message: data.message
+      };
+      
+      console.log('Submitting to Google Sheets:', formData);
+      
+      const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       });
+      
+      if (response.ok) {
+        const result = await response.json();
+        console.log('Google Sheets response:', result);
+        
+        toast({
+          title: 'Message Sent Successfully!',
+          description: 'Thank you for contacting us. Your message has been saved and we will get back to you soon.',
+        });
+      } else {
+        throw new Error('Failed to submit to Google Sheets');
+      }
       
       form.reset();
       

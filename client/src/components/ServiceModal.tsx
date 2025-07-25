@@ -48,22 +48,39 @@ export default function ServiceModal({ serviceId, isOpen, onClose }: ServiceModa
 
   const onSubmit = async (data: ConsultationForm) => {
     try {
-      const timestamp = new Date().toLocaleString();
+      const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby4V_xFrStgg18HkjnBLqqfCcU_wcSuEzTmRTCDjE0iwpRvzhjx1A_dAW0XGDwcZIFSPw/exec';
       
-      console.log('Consultation form submitted:', {
-        timestamp,
+      const formData = {
+        formType: 'consultation',
+        timestamp: new Date().toLocaleString(),
         name: data.name,
         email: data.email,
         phone: data.phone,
         service: data.service,
-        description: data.description,
-        type: 'Consultation Booking'
+        description: data.description
+      };
+      
+      console.log('Submitting consultation to Google Sheets:', formData);
+      
+      const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       });
       
-      toast({
-        title: 'Consultation Request Received!',
-        description: 'Thank you for your interest. We will contact you soon to schedule your consultation.',
-      });
+      if (response.ok) {
+        const result = await response.json();
+        console.log('Google Sheets response:', result);
+        
+        toast({
+          title: 'Consultation Request Sent!',
+          description: 'Thank you for your interest. Your request has been saved and we will contact you soon to schedule your consultation.',
+        });
+      } else {
+        throw new Error('Failed to submit to Google Sheets');
+      }
       
       form.reset();
       setActiveTab('overview');

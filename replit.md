@@ -111,7 +111,8 @@ The application is configured as a static site:
 - Enhanced mega menu with interactive service showcase displaying detailed information on hover
 - Removed client portal as per user requirement - focused on core business website functionality
 - **Converted to Static Site (January 2025)**: Removed all backend dependencies, converted to pure frontend static website
-- Contact forms now use mailto links instead of API endpoints
+- **Google Sheets Integration (July 2025)**: Contact forms now submit directly to Google Sheets via Google Apps Script
+- Removed mailto fallbacks, forms show success messages and save data automatically
 - Can be deployed to any static hosting service (Netlify, Vercel, GitHub Pages, etc.)
 
 ### Services Section Enhancements (January 2025)
