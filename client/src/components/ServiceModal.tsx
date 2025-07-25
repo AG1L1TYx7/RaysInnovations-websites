@@ -48,52 +48,48 @@ export default function ServiceModal({ serviceId, isOpen, onClose }: ServiceModa
 
   const onSubmit = async (data: ConsultationForm) => {
     try {
-      // *** REPLACE THIS URL WITH YOUR GOOGLE SHEETS URL ***
-      const GOOGLE_SHEETS_URL = 'YOUR_GOOGLE_SHEETS_URL_HERE';
+      // Create email content
+      const subject = `Consultation Request - ${data.service}`;
+      const body = `
+Consultation Booking Request
+===========================
+
+Name: ${data.name}
+Email: ${data.email}
+Phone: ${data.phone}
+Service: ${data.service}
+
+Project Description:
+${data.description}
+
+Submitted: ${new Date().toLocaleString()}
+Form Type: Consultation
+      `.trim();
       
-      const formData = new FormData();
-      formData.append('timestamp', new Date().toLocaleString());
-      formData.append('name', data.name);
-      formData.append('email', data.email);
-      formData.append('phone', data.phone);
-      formData.append('service', data.service);
-      formData.append('description', data.description);
-      formData.append('formType', 'consultation');
+      const mailtoLink = `mailto:bishworupx7@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
       
-      console.log('Submitting consultation request to Google Sheets:', {
-        name: data.name,
-        email: data.email,
-        phone: data.phone,
-        service: data.service,
-        description: data.description
+      console.log('Opening email client with consultation request data');
+      
+      // Open email client
+      window.location.href = mailtoLink;
+      
+      toast({
+        variant: 'success',
+        title: 'Email Client Opened!',
+        description: 'Please send the pre-filled email to complete your consultation request.',
       });
-      
-      const response = await fetch(GOOGLE_SHEETS_URL, {
-        method: 'POST',
-        body: formData,
-      });
-      
-      if (response.ok) {
-        toast({
-          variant: 'success',
-          title: 'Consultation Request Sent!',
-          description: 'Thank you for your interest. Your request has been saved and we will contact you soon to schedule your consultation.',
-        });
-      } else {
-        throw new Error('Failed to submit consultation request');
-      }
       
       form.reset();
       setActiveTab('overview');
       onClose();
       
     } catch (error) {
-      console.error('Error submitting consultation form:', error);
+      console.error('Error opening email client:', error);
       
       toast({
         variant: 'error',
-        title: 'Submission Error',
-        description: 'Unable to send consultation request at this time. Please try again or contact us directly.',
+        title: 'Unable to Open Email',
+        description: 'Please contact us directly at bishworupx7@gmail.com',
       });
       
       form.reset();

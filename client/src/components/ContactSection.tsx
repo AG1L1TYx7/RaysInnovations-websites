@@ -40,52 +40,46 @@ export default function ContactSection() {
 
   const onSubmit = async (data: ContactForm) => {
     try {
-      // *** REPLACE THIS URL WITH YOUR GOOGLE SHEETS URL ***
-      const GOOGLE_SHEETS_URL = 'YOUR_GOOGLE_SHEETS_URL_HERE';
+      // Create email content
+      const subject = `Contact Form Submission - ${data.service}`;
+      const body = `
+Contact Form Submission
+======================
+
+Name: ${data.firstName} ${data.lastName}
+Email: ${data.email}
+Phone: ${data.phone}
+Service Interest: ${data.service}
+
+Message:
+${data.message}
+
+Submitted: ${new Date().toLocaleString()}
+Form Type: Contact
+      `.trim();
       
-      const formData = new FormData();
-      formData.append('timestamp', new Date().toLocaleString());
-      formData.append('firstName', data.firstName);
-      formData.append('lastName', data.lastName);
-      formData.append('email', data.email);
-      formData.append('phone', data.phone);
-      formData.append('service', data.service);
-      formData.append('message', data.message);
-      formData.append('formType', 'contact');
+      const mailtoLink = `mailto:bishworupx7@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
       
-      console.log('Submitting to Google Sheets:', {
-        firstName: data.firstName,
-        lastName: data.lastName,
-        email: data.email,
-        phone: data.phone,
-        service: data.service,
-        message: data.message
+      console.log('Opening email client with contact form data');
+      
+      // Open email client
+      window.location.href = mailtoLink;
+      
+      toast({
+        variant: 'success',
+        title: 'Email Client Opened!',
+        description: 'Please send the pre-filled email to complete your message submission.',
       });
-      
-      const response = await fetch(GOOGLE_SHEETS_URL, {
-        method: 'POST',
-        body: formData,
-      });
-      
-      if (response.ok) {
-        toast({
-          variant: 'success',
-          title: 'Message Sent Successfully!',
-          description: 'Thank you for contacting us. Your message has been saved and we will get back to you soon.',
-        });
-      } else {
-        throw new Error('Failed to submit form');
-      }
       
       form.reset();
       
     } catch (error) {
-      console.error('Error submitting form:', error);
+      console.error('Error opening email client:', error);
       
       toast({
         variant: 'error',
-        title: 'Submission Error',
-        description: 'Unable to send message at this time. Please try again or contact us directly.',
+        title: 'Unable to Open Email',
+        description: 'Please contact us directly at bishworupx7@gmail.com',
       });
       
       form.reset();
