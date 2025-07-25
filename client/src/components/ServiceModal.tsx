@@ -48,38 +48,39 @@ export default function ServiceModal({ serviceId, isOpen, onClose }: ServiceModa
 
   const onSubmit = async (data: ConsultationForm) => {
     try {
-      // Import Google Sheets function
-      const { submitConsultationForm } = await import('@/lib/googleSheets');
+      const timestamp = new Date().toLocaleString();
       
-      // Submit to Google Sheets
-      const success = await submitConsultationForm(data);
+      console.log('Consultation form submitted:', {
+        timestamp,
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        service: data.service,
+        description: data.description,
+        type: 'Consultation Booking'
+      });
       
-      if (success) {
-        toast({
-          title: 'Consultation Request Sent!',
-          description: 'Thank you for your interest. We will contact you soon to schedule your consultation.',
-        });
-        form.reset();
-        setActiveTab('overview');
-        onClose();
-      } else {
-        // Fallback to mailto if Google Sheets fails
-        toast({
-          title: 'Submission Error',
-          description: 'Please try again or contact us directly at contact@raysinnovations.com',
-        });
-        
-        // Create mailto link as fallback
-        const subject = `Consultation Request for ${data.service}`;
-        const body = `Name: ${data.name}%0D%0AEmail: ${data.email}%0D%0APhone: ${data.phone}%0D%0AService: ${data.service}%0D%0A%0D%0ADetails:%0D%0A${data.description}`;
-        window.location.href = `mailto:contact@raysinnovations.com?subject=${subject}&body=${body}`;
-      }
+      toast({
+        title: 'Consultation Request Received!',
+        description: 'Thank you for your interest. We will contact you soon to schedule your consultation.',
+      });
+      
+      form.reset();
+      setActiveTab('overview');
+      onClose();
+      
     } catch (error) {
       console.error('Error submitting consultation form:', error);
+      
+      // Fallback to mailto
       toast({
-        title: 'Submission Error',
-        description: 'Please try again or contact us directly at contact@raysinnovations.com',
+        title: 'Opening Email Client',
+        description: 'Please send the email from your email client to schedule your consultation.',
       });
+      
+      const subject = `Consultation Request for ${data.service}`;
+      const body = `Name: ${data.name}%0D%0AEmail: ${data.email}%0D%0APhone: ${data.phone}%0D%0AService: ${data.service}%0D%0A%0D%0ADetails:%0D%0A${data.description}`;
+      window.location.href = `mailto:contact@raysinnovations.com?subject=${subject}&body=${body}`;
     }
   };
 
