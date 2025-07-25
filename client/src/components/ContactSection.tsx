@@ -38,19 +38,39 @@ export default function ContactSection() {
     },
   });
 
-  const onSubmit = (data: ContactForm) => {
-    // Show success message for static site
-    toast({
-      title: 'Thank You!',
-      description: 'Please email us at contact@raysinnovations.com with your inquiry.',
-    });
-    
-    // Create mailto link with form data
-    const subject = `Inquiry about ${data.service}`;
-    const body = `Name: ${data.firstName} ${data.lastName}%0D%0AEmail: ${data.email}%0D%0APhone: ${data.phone}%0D%0AService: ${data.service}%0D%0A%0D%0AMessage:%0D%0A${data.message}`;
-    window.location.href = `mailto:contact@raysinnovations.com?subject=${subject}&body=${body}`;
-    
-    form.reset();
+  const onSubmit = async (data: ContactForm) => {
+    try {
+      // Import Google Sheets function
+      const { submitContactForm } = await import('@/lib/googleSheets');
+      
+      // Submit to Google Sheets
+      const success = await submitContactForm(data);
+      
+      if (success) {
+        toast({
+          title: 'Message Sent Successfully!',
+          description: 'Thank you for contacting us. We will get back to you soon.',
+        });
+        form.reset();
+      } else {
+        // Fallback to mailto if Google Sheets fails
+        toast({
+          title: 'Submission Error',
+          description: 'Please try again or contact us directly at contact@raysinnovations.com',
+        });
+        
+        // Create mailto link as fallback
+        const subject = `Inquiry about ${data.service}`;
+        const body = `Name: ${data.firstName} ${data.lastName}%0D%0AEmail: ${data.email}%0D%0APhone: ${data.phone}%0D%0AService: ${data.service}%0D%0A%0D%0AMessage:%0D%0A${data.message}`;
+        window.location.href = `mailto:contact@raysinnovations.com?subject=${subject}&body=${body}`;
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast({
+        title: 'Submission Error',
+        description: 'Please try again or contact us directly at contact@raysinnovations.com',
+      });
+    }
   };
 
   const contactInfo = [

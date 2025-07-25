@@ -46,21 +46,41 @@ export default function ServiceModal({ serviceId, isOpen, onClose }: ServiceModa
     },
   });
 
-  const onSubmit = (data: ConsultationForm) => {
-    // Show success message for static site
-    toast({
-      title: 'Thank You!',
-      description: 'Please email us at contact@raysinnovations.com to schedule your consultation.',
-    });
-    
-    // Create mailto link with consultation data
-    const subject = `Consultation Request for ${data.service}`;
-    const body = `Name: ${data.name}%0D%0AEmail: ${data.email}%0D%0APhone: ${data.phone}%0D%0AService: ${data.service}%0D%0A%0D%0ADetails:%0D%0A${data.description}`;
-    window.location.href = `mailto:contact@raysinnovations.com?subject=${subject}&body=${body}`;
-    
-    form.reset();
-    setActiveTab('overview');
-    onClose();
+  const onSubmit = async (data: ConsultationForm) => {
+    try {
+      // Import Google Sheets function
+      const { submitConsultationForm } = await import('@/lib/googleSheets');
+      
+      // Submit to Google Sheets
+      const success = await submitConsultationForm(data);
+      
+      if (success) {
+        toast({
+          title: 'Consultation Request Sent!',
+          description: 'Thank you for your interest. We will contact you soon to schedule your consultation.',
+        });
+        form.reset();
+        setActiveTab('overview');
+        onClose();
+      } else {
+        // Fallback to mailto if Google Sheets fails
+        toast({
+          title: 'Submission Error',
+          description: 'Please try again or contact us directly at contact@raysinnovations.com',
+        });
+        
+        // Create mailto link as fallback
+        const subject = `Consultation Request for ${data.service}`;
+        const body = `Name: ${data.name}%0D%0AEmail: ${data.email}%0D%0APhone: ${data.phone}%0D%0AService: ${data.service}%0D%0A%0D%0ADetails:%0D%0A${data.description}`;
+        window.location.href = `mailto:contact@raysinnovations.com?subject=${subject}&body=${body}`;
+      }
+    } catch (error) {
+      console.error('Error submitting consultation form:', error);
+      toast({
+        title: 'Submission Error',
+        description: 'Please try again or contact us directly at contact@raysinnovations.com',
+      });
+    }
   };
 
   if (!service) return null;
