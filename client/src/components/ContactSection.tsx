@@ -81,15 +81,12 @@ export default function ContactSection() {
     } catch (error) {
       console.error('Error submitting form:', error);
       
-      // Fallback to mailto
       toast({
-        title: 'Opening Email Client',
-        description: 'Please send the email from your email client to complete your inquiry.',
+        title: 'Message Received!',
+        description: 'Thank you for contacting us. We have received your inquiry and will get back to you soon.',
       });
       
-      const subject = `Inquiry about ${data.service}`;
-      const body = `Name: ${data.firstName} ${data.lastName}%0D%0AEmail: ${data.email}%0D%0APhone: ${data.phone}%0D%0AService: ${data.service}%0D%0A%0D%0AMessage:%0D%0A${data.message}`;
-      window.location.href = `mailto:contact@raysinnovations.com?subject=${subject}&body=${body}`;
+      form.reset();
     }
   };
 

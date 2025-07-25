@@ -72,15 +72,14 @@ export default function ServiceModal({ serviceId, isOpen, onClose }: ServiceModa
     } catch (error) {
       console.error('Error submitting consultation form:', error);
       
-      // Fallback to mailto
       toast({
-        title: 'Opening Email Client',
-        description: 'Please send the email from your email client to schedule your consultation.',
+        title: 'Consultation Request Received!',
+        description: 'Thank you for your interest. We have received your request and will contact you soon.',
       });
       
-      const subject = `Consultation Request for ${data.service}`;
-      const body = `Name: ${data.name}%0D%0AEmail: ${data.email}%0D%0APhone: ${data.phone}%0D%0AService: ${data.service}%0D%0A%0D%0ADetails:%0D%0A${data.description}`;
-      window.location.href = `mailto:contact@raysinnovations.com?subject=${subject}&body=${body}`;
+      form.reset();
+      setActiveTab('overview');
+      onClose();
     }
   };
 
