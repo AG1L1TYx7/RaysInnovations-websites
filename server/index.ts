@@ -11,6 +11,12 @@ async function startServer() {
       port: PORT,
       host: true,
       strictPort: true,
+      allowedHosts: [
+        'localhost',
+        '127.0.0.1',
+        '0.0.0.0',
+        '5c5fff5d-b160-4e5c-a653-7a793fa483d2-00-3i1ern9mvw8v4.picard.replit.dev'
+      ],
     },
     resolve: {
       alias: {
