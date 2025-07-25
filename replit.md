@@ -91,14 +91,10 @@ The application is configured as a static site:
 
 ### Documentation and Setup (January 2025)
 - Added comprehensive README.md with installation and setup instructions
-- Documented database schema and storage locations
-- Included troubleshooting guide and API endpoint documentation
 - Clear instructions for local development and production deployment
-- Database information storage:
-  - Development: In-memory storage (MemStorage) or PostgreSQL
-  - Production: PostgreSQL via DATABASE_URL environment variable
-  - Tables: users, inquiries, consultation_bookings
-  - Recommended: Neon serverless PostgreSQL for easy cloud deployment
+- Project structure documentation and troubleshooting guide
+- Static site deployment options (Netlify, Vercel, GitHub Pages, etc.)
+- Environment setup and dependency management instructions
 
 ### Recent Enhancements (July 2025)
 - Expanded service portfolio from 4 to 10 comprehensive IT services
