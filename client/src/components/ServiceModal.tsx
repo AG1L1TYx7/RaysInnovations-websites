@@ -76,6 +76,7 @@ export default function ServiceModal({ serviceId, isOpen, onClose }: ServiceModa
         console.log('Consultation data sent to Google Apps Script');
         
         toast({
+          variant: 'success',
           title: 'Consultation Request Sent!',
           description: 'Thank you for your interest. Your request has been saved and we will contact you soon to schedule your consultation.',
         });
@@ -85,6 +86,7 @@ export default function ServiceModal({ serviceId, isOpen, onClose }: ServiceModa
         
         // Fallback: Show success message anyway since data was captured
         toast({
+          variant: 'warning',
           title: 'Consultation Request Received!',
           description: 'Thank you for your interest. We have received your request and will contact you soon.',
         });
@@ -98,8 +100,9 @@ export default function ServiceModal({ serviceId, isOpen, onClose }: ServiceModa
       console.error('Error submitting consultation form:', error);
       
       toast({
-        title: 'Consultation Request Received!',
-        description: 'Thank you for your interest. We have received your request and will contact you soon.',
+        variant: 'error',
+        title: 'Submission Error',
+        description: 'Unable to send consultation request at this time. Please try again or contact us directly.',
       });
       
       form.reset();

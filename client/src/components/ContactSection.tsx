@@ -69,6 +69,7 @@ export default function ContactSection() {
         console.log('Data sent to Google Apps Script');
         
         toast({
+          variant: 'success',
           title: 'Message Sent Successfully!',
           description: 'Thank you for contacting us. Your message has been saved and we will get back to you soon.',
         });
@@ -78,6 +79,7 @@ export default function ContactSection() {
         
         // Fallback: Show success message anyway since data was captured
         toast({
+          variant: 'warning',
           title: 'Message Received!',
           description: 'Thank you for contacting us. We have received your inquiry and will get back to you soon.',
         });
@@ -89,8 +91,9 @@ export default function ContactSection() {
       console.error('Error submitting form:', error);
       
       toast({
-        title: 'Message Received!',
-        description: 'Thank you for contacting us. We have received your inquiry and will get back to you soon.',
+        variant: 'error',
+        title: 'Submission Error',
+        description: 'Unable to send message at this time. Please try again or contact us directly.',
       });
       
       form.reset();
