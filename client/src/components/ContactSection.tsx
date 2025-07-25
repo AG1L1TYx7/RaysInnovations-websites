@@ -40,7 +40,7 @@ export default function ContactSection() {
 
   const onSubmit = async (data: ContactForm) => {
     try {
-      const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby4V_xFrStgg18HkjnBLqqfCcU_wcSuEzTmRTCDjE0iwpRvzhjx1A_dAW0XGDwcZIFSPw/exec';
+      const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyr39dahiCl6Txi45bDU4ZhM5NnJ0e2GWzzxHDgPU1_x7vxMyJzLFKSvyXBhB_DdRaw4Q/exec';
       
       const formData = {
         formType: 'contact',
