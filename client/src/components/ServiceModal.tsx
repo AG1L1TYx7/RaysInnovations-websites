@@ -48,7 +48,7 @@ export default function ServiceModal({ serviceId, isOpen, onClose }: ServiceModa
 
   const onSubmit = async (data: ConsultationForm) => {
     try {
-      const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyr39dahiCl6Txi45bDU4ZhM5NnJ0e2GWzzxHDgPU1_x7vxMyJzLFKSvyXBhB_DdRaw4Q/exec';
+      const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx2ZL0xLvXwQPZwa2X6uMhdVjackBrNq-GxiJspTI5Xd02rpkPiYFgYqXHaI-XcTWoM/exec';
       
       const formData = {
         formType: 'consultation',
