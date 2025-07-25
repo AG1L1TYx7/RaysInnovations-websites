@@ -40,50 +40,41 @@ export default function ContactSection() {
 
   const onSubmit = async (data: ContactForm) => {
     try {
-      const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx2ZL0xLvXwQPZwa2X6uMhdVjackBrNq-GxiJspTI5Xd02rpkPiYFgYqXHaI-XcTWoM/exec';
+      // *** REPLACE THIS URL WITH YOUR GOOGLE SHEETS URL ***
+      const GOOGLE_SHEETS_URL = 'YOUR_GOOGLE_SHEETS_URL_HERE';
       
-      const formData = {
-        formType: 'contact',
-        timestamp: new Date().toLocaleString(),
+      const formData = new FormData();
+      formData.append('timestamp', new Date().toLocaleString());
+      formData.append('firstName', data.firstName);
+      formData.append('lastName', data.lastName);
+      formData.append('email', data.email);
+      formData.append('phone', data.phone);
+      formData.append('service', data.service);
+      formData.append('message', data.message);
+      formData.append('formType', 'contact');
+      
+      console.log('Submitting to Google Sheets:', {
         firstName: data.firstName,
         lastName: data.lastName,
         email: data.email,
         phone: data.phone,
         service: data.service,
         message: data.message
-      };
+      });
       
-      console.log('Submitting to Google Sheets:', formData);
+      const response = await fetch(GOOGLE_SHEETS_URL, {
+        method: 'POST',
+        body: formData,
+      });
       
-      // Try to submit to Google Apps Script
-      try {
-        const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
-        });
-        
-        console.log('Response from Google Apps Script:', response.status);
-        console.log('Data sent to Google Apps Script');
-        
+      if (response.ok) {
         toast({
           variant: 'success',
           title: 'Message Sent Successfully!',
           description: 'Thank you for contacting us. Your message has been saved and we will get back to you soon.',
         });
-        
-      } catch (scriptError) {
-        console.error('Google Apps Script error:', scriptError);
-        
-        // Fallback: Show success message anyway since data was captured
-        toast({
-          variant: 'warning',
-          title: 'Message Received!',
-          description: 'Thank you for contacting us. We have received your inquiry and will get back to you soon.',
-        });
+      } else {
+        throw new Error('Failed to submit form');
       }
       
       form.reset();

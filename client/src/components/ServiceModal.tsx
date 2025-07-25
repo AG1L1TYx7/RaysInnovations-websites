@@ -48,48 +48,39 @@ export default function ServiceModal({ serviceId, isOpen, onClose }: ServiceModa
 
   const onSubmit = async (data: ConsultationForm) => {
     try {
-      const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx2ZL0xLvXwQPZwa2X6uMhdVjackBrNq-GxiJspTI5Xd02rpkPiYFgYqXHaI-XcTWoM/exec';
+      // *** REPLACE THIS URL WITH YOUR GOOGLE SHEETS URL ***
+      const GOOGLE_SHEETS_URL = 'YOUR_GOOGLE_SHEETS_URL_HERE';
       
-      const formData = {
-        formType: 'consultation',
-        timestamp: new Date().toLocaleString(),
+      const formData = new FormData();
+      formData.append('timestamp', new Date().toLocaleString());
+      formData.append('name', data.name);
+      formData.append('email', data.email);
+      formData.append('phone', data.phone);
+      formData.append('service', data.service);
+      formData.append('description', data.description);
+      formData.append('formType', 'consultation');
+      
+      console.log('Submitting consultation request to Google Sheets:', {
         name: data.name,
         email: data.email,
         phone: data.phone,
         service: data.service,
         description: data.description
-      };
+      });
       
-      console.log('Submitting consultation to Google Sheets:', formData);
+      const response = await fetch(GOOGLE_SHEETS_URL, {
+        method: 'POST',
+        body: formData,
+      });
       
-      // Try to submit to Google Apps Script
-      try {
-        const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
-        });
-        
-        console.log('Consultation data sent to Google Apps Script');
-        
+      if (response.ok) {
         toast({
           variant: 'success',
           title: 'Consultation Request Sent!',
           description: 'Thank you for your interest. Your request has been saved and we will contact you soon to schedule your consultation.',
         });
-        
-      } catch (scriptError) {
-        console.error('Google Apps Script error:', scriptError);
-        
-        // Fallback: Show success message anyway since data was captured
-        toast({
-          variant: 'warning',
-          title: 'Consultation Request Received!',
-          description: 'Thank you for your interest. We have received your request and will contact you soon.',
-        });
+      } else {
+        throw new Error('Failed to submit consultation request');
       }
       
       form.reset();
