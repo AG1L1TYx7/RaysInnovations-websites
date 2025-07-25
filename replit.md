@@ -96,6 +96,14 @@ The application is configured as a static site:
 - Static site deployment options (Netlify, Vercel, GitHub Pages, etc.)
 - Environment setup and dependency management instructions
 
+### Google Apps Script Troubleshooting (July 2025)
+- Identified Google Apps Script deployment issues causing "401 Unauthorized" errors
+- User email: bishworupx7@gmail.com - script must be deployed under this account
+- Current script URL returning "Page Not Found" despite re-deployment attempts
+- Created comprehensive troubleshooting guides and fresh script creation instructions
+- Form submissions working on frontend but Google Apps Script not receiving data properly
+- Solution: Create new Google Apps Script project with fresh deployment
+
 ### Recent Enhancements (July 2025)
 - Expanded service portfolio from 4 to 10 comprehensive IT services
 - Enhanced mega menu with categorized service organization

@@ -66,6 +66,7 @@ export default function ContactSection() {
           body: JSON.stringify(formData),
         });
         
+        console.log('Response from Google Apps Script:', response.status);
         console.log('Data sent to Google Apps Script');
         
         toast({
