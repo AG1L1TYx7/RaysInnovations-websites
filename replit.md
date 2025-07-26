@@ -103,6 +103,20 @@ The application is configured as a static site:
 - All form data sent to bishworupx7@gmail.com via email
 - No external APIs or complex integrations needed
 - Clean, reliable form submission without authentication issues
+- Fixed "Get Directions" button to open Google Maps with office address
+
+### Enhanced Blog System (July 2025)
+- Complete blog overhaul with SEO-optimized individual post pages
+- Working "Read More" buttons that navigate to full article content
+- Three comprehensive articles with complete HTML content:
+  - AWS Best Practices for 2024 (Cloud Computing)
+  - Building Intelligent Applications with LLMs (AI & Machine Learning)
+  - Cybersecurity in 2024 (Security Best Practices)
+- Individual blog post pages with proper routing (/blog/:slug)
+- SEO optimization with meta descriptions, keywords, and Open Graph tags
+- Author bios, social sharing functionality, and related posts
+- Professional blog layout with enhanced UI and navigation
+- Blog data centralized in blogData.ts with type safety
 
 ### Recent Enhancements (July 2025)
 - Expanded service portfolio from 4 to 10 comprehensive IT services
