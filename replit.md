@@ -96,13 +96,13 @@ The application is configured as a static site:
 - Static site deployment options (Netlify, Vercel, GitHub Pages, etc.)
 - Environment setup and dependency management instructions
 
-### Simple Google Sheets Integration (July 2025)
-- Removed all Google Apps Script complexity due to deployment issues
-- Simplified form submission to direct Google Sheets integration
-- Contact and consultation forms now use simple FormData approach
-- User requested removal of Google Apps Script dependencies
-- Forms ready to submit directly to user-provided Google Sheets URL
-- Cleaned up all unnecessary Google Apps Script files and documentation
+### Contact Forms Using Email Integration (July 2025)
+- Removed all Google Sheets and Google Apps Script dependencies
+- Contact and consultation forms use simple mailto approach
+- Forms open user's email client with pre-filled professional messages
+- All form data sent to bishworupx7@gmail.com via email
+- No external APIs or complex integrations needed
+- Clean, reliable form submission without authentication issues
 
 ### Recent Enhancements (July 2025)
 - Expanded service portfolio from 4 to 10 comprehensive IT services
