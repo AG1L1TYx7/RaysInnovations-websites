@@ -403,7 +403,14 @@ export default function Navigation() {
                 >
                   About
                 </button>
-                <Link href="/blog" className="text-gray-700 hover:text-primary px-3 py-2 text-sm font-medium transition-colors">
+                <Link 
+                  href="/blog" 
+                  className="text-gray-700 hover:text-primary px-3 py-2 text-sm font-medium transition-colors"
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    setIsServicesOpen(false);
+                  }}
+                >
                   Blog
                 </Link>
                 <button
@@ -469,7 +476,14 @@ export default function Navigation() {
                 >
                   About
                 </button>
-                <Link href="/blog" className="block w-full text-left px-3 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors">
+                <Link 
+                  href="/blog" 
+                  className="block w-full text-left px-3 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    setIsServicesOpen(false);
+                  }}
+                >
                   Blog
                 </Link>
                 <button

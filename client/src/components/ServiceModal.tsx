@@ -160,11 +160,14 @@ Form Type: Consultation
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto" aria-describedby="service-modal-description">
         <DialogHeader className="pb-4 border-b">
           <DialogTitle className="text-3xl font-bold text-gray-900">
             {service.title}
           </DialogTitle>
+          <p id="service-modal-description" className="sr-only">
+            Service details and consultation booking for {service.title}
+          </p>
         </DialogHeader>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 p-6">
