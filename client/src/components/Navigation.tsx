@@ -21,16 +21,38 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const offsetTop = element.offsetTop - 80;
-      window.scrollTo({
-        top: offsetTop,
-        behavior: 'smooth'
-      });
+  const navigateToSection = (sectionId: string) => {
+    // If we're on the home page, scroll to section
+    if (location === '/') {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        const offsetTop = element.offsetTop - 80;
+        window.scrollTo({
+          top: offsetTop,
+          behavior: 'smooth'
+        });
+      }
+    } else {
+      // If we're on a different page, navigate to home and then scroll
+      if (sectionId === 'home') {
+        setLocation('/');
+      } else {
+        setLocation('/#' + sectionId);
+        // Use timeout to allow page navigation to complete
+        setTimeout(() => {
+          const element = document.getElementById(sectionId);
+          if (element) {
+            const offsetTop = element.offsetTop - 80;
+            window.scrollTo({
+              top: offsetTop,
+              behavior: 'smooth'
+            });
+          }
+        }, 100);
+      }
     }
     setIsMobileMenuOpen(false);
+    setIsServicesOpen(false);
   };
 
   const getColorClasses = (color: string) => {
@@ -81,16 +103,18 @@ export default function Navigation() {
           <div className="flex items-center h-16 w-full">
             {/* Logo */}
             <div className="flex-shrink-0 mr-10">
-              <h1 className="text-2xl font-bold text-primary cursor-pointer" onClick={() => scrollToSection('home')}>
-                Rays Innovations
-              </h1>
+              <Link href="/">
+                <h1 className="text-2xl font-bold text-primary cursor-pointer">
+                  Rays Innovations
+                </h1>
+              </Link>
             </div>
             
             {/* Desktop Navigation - All items on left */}
             <div className="hidden md:flex flex-1">
               <div className="flex items-center space-x-8">
                 <button
-                  onClick={() => scrollToSection('home')}
+                  onClick={() => navigateToSection('home')}
                   className="text-gray-700 hover:text-primary px-3 py-2 text-sm font-medium transition-colors"
                 >
                   Home
@@ -182,7 +206,7 @@ export default function Navigation() {
                                     onMouseLeave={() => setHoveredService(null)}
                                     onClick={() => {
                                       setIsServicesOpen(false);
-                                      scrollToSection('services');
+                                      navigateToSection('services');
                                     }}
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
@@ -270,7 +294,7 @@ export default function Navigation() {
                                               className={`flex-1 py-3 px-4 rounded-xl bg-gradient-to-r ${getColorClasses(service.color).replace('text-', 'from-')} to-blue-600 text-white font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105`}
                                               onClick={() => {
                                                 setIsServicesOpen(false);
-                                                scrollToSection('contact');
+                                                navigateToSection('contact');
                                               }}
                                             >
                                               Get Started
@@ -279,7 +303,7 @@ export default function Navigation() {
                                               className="px-4 py-3 border-2 border-blue-300 text-blue-700 rounded-xl font-semibold hover:bg-blue-50 transition-all duration-300"
                                               onClick={() => {
                                                 setIsServicesOpen(false);
-                                                scrollToSection('services');
+                                                navigateToSection('services');
                                               }}
                                             >
                                               Learn More
@@ -322,7 +346,7 @@ export default function Navigation() {
                               whileTap={{ scale: 0.95 }}
                               onClick={() => {
                                 setIsServicesOpen(false);
-                                scrollToSection('contact');
+                                navigateToSection('contact');
                               }}
                             >
                               <i className="fas fa-rocket mr-2"></i>
@@ -334,7 +358,7 @@ export default function Navigation() {
                               whileTap={{ scale: 0.95 }}
                               onClick={() => {
                                 setIsServicesOpen(false);
-                                scrollToSection('contact');
+                                navigateToSection('contact');
                               }}
                             >
                               <i className="fas fa-calendar-alt mr-2"></i>
@@ -350,7 +374,7 @@ export default function Navigation() {
                 </div>
                 
                 <button
-                  onClick={() => scrollToSection('about')}
+                  onClick={() => navigateToSection('about')}
                   className="text-gray-700 hover:text-primary px-3 py-2 text-sm font-medium transition-colors"
                 >
                   About
@@ -359,7 +383,7 @@ export default function Navigation() {
                   Blog
                 </Link>
                 <button
-                  onClick={() => scrollToSection('contact')}
+                  onClick={() => navigateToSection('contact')}
                   className="text-gray-700 hover:text-primary px-3 py-2 text-sm font-medium transition-colors"
                 >
                   Contact
@@ -369,7 +393,7 @@ export default function Navigation() {
                   className="bg-primary text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  onClick={() => scrollToSection('contact')}
+                  onClick={() => navigateToSection('contact')}
                 >
                   Book Consultation
                 </motion.button>
@@ -404,19 +428,19 @@ export default function Navigation() {
             >
               <div className="px-2 pt-2 pb-3 space-y-1">
                 <button
-                  onClick={() => scrollToSection('home')}
+                  onClick={() => navigateToSection('home')}
                   className="block w-full text-left px-3 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
                 >
                   Home
                 </button>
                 <button
-                  onClick={() => scrollToSection('services')}
+                  onClick={() => navigateToSection('services')}
                   className="block w-full text-left px-3 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
                 >
                   Services
                 </button>
                 <button
-                  onClick={() => scrollToSection('about')}
+                  onClick={() => navigateToSection('about')}
                   className="block w-full text-left px-3 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
                 >
                   About
@@ -425,7 +449,7 @@ export default function Navigation() {
                   Blog
                 </Link>
                 <button
-                  onClick={() => scrollToSection('contact')}
+                  onClick={() => navigateToSection('contact')}
                   className="block w-full text-left px-3 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
                 >
                   Contact
@@ -434,7 +458,7 @@ export default function Navigation() {
                 <div className="px-3 py-2">
                   <button
                     className="w-full bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium"
-                    onClick={() => scrollToSection('contact')}
+                    onClick={() => navigateToSection('contact')}
                   >
                     Book Consultation
                   </button>
