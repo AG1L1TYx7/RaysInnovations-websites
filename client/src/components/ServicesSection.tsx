@@ -239,7 +239,7 @@ export default function ServicesSection() {
                 <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 rounded-3xl blur-lg opacity-0 group-hover:opacity-30 transition duration-700 group-hover:duration-300"></div>
                 
                 {/* Ultra Enhanced card with premium effects */}
-                <div className="relative bg-white/95 backdrop-blur-lg rounded-3xl p-6 lg:p-8 text-center cursor-pointer border border-white/40 shadow-xl hover:shadow-3xl transition-all duration-700 service-card service-card-3d overflow-hidden">
+                <div className="relative bg-white/95 backdrop-blur-lg rounded-3xl p-6 lg:p-8 text-center cursor-pointer border border-white/40 shadow-xl hover:shadow-3xl transition-all duration-700 service-card service-card-3d overflow-hidden" data-service-id={service.id}>
                   {/* Premium shimmer effect overlay */}
                   <div className="absolute inset-0 shimmer opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
                   

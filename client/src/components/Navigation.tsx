@@ -299,15 +299,34 @@ export default function Navigation() {
                                               onClick={() => {
                                                 setIsServicesOpen(false);
                                                 navigateToSection('contact');
+                                                // Scroll to consultation form specifically
+                                                setTimeout(() => {
+                                                  const consultationForm = document.querySelector('[data-consultation-form]');
+                                                  if (consultationForm) {
+                                                    consultationForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                                  }
+                                                }, 200);
                                               }}
                                             >
-                                              Get Started
+                                              Book Consultation
                                             </button>
                                             <button 
                                               className="px-4 py-3 border-2 border-blue-300 text-blue-700 rounded-xl font-semibold hover:bg-blue-50 transition-all duration-300"
                                               onClick={() => {
                                                 setIsServicesOpen(false);
                                                 navigateToSection('services');
+                                                // Highlight the specific service
+                                                setTimeout(() => {
+                                                  const serviceElement = document.querySelector(`[data-service-id="${service.id}"]`);
+                                                  if (serviceElement) {
+                                                    serviceElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                                    // Add temporary highlight effect
+                                                    serviceElement.classList.add('ring-4', 'ring-blue-400', 'ring-opacity-75');
+                                                    setTimeout(() => {
+                                                      serviceElement.classList.remove('ring-4', 'ring-blue-400', 'ring-opacity-75');
+                                                    }, 3000);
+                                                  }
+                                                }, 200);
                                               }}
                                             >
                                               Learn More
