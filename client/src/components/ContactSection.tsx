@@ -329,6 +329,12 @@ Form Type: Contact
                   className="mt-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
+                  onClick={() => {
+                    const address = "123 Innovation Drive, Tech Hub, CA 90210";
+                    const encodedAddress = encodeURIComponent(address);
+                    const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
+                    window.open(googleMapsUrl, '_blank');
+                  }}
                 >
                   Get Directions
                   <i className="fas fa-arrow-right ml-2"></i>
