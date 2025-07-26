@@ -2,77 +2,10 @@ import { motion } from 'framer-motion';
 import { Link } from 'wouter';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
-
-const blogPosts = [
-  {
-    id: 1,
-    title: 'The Future of Cloud Computing: AWS Best Practices for 2024',
-    excerpt: 'Discover the latest AWS trends and best practices that are shaping cloud infrastructure in 2024. Learn how to optimize your cloud strategy for maximum efficiency and scalability.',
-    author: 'Sarah Johnson',
-    date: 'January 15, 2024',
-    readTime: '8 min read',
-    category: 'Cloud Computing',
-    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop',
-    tags: ['AWS', 'Cloud', 'DevOps'],
-  },
-  {
-    id: 2,
-    title: 'Building Intelligent Applications with LLMs: A Comprehensive Guide',
-    excerpt: 'Explore how Large Language Models are revolutionizing application development. From chatbots to content generation, learn how to integrate AI into your business solutions.',
-    author: 'Michael Chen',
-    date: 'January 10, 2024',
-    readTime: '12 min read',
-    category: 'AI & Machine Learning',
-    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1000&auto=format&fit=crop',
-    tags: ['AI', 'LLM', 'Machine Learning'],
-  },
-  {
-    id: 3,
-    title: 'Cybersecurity in 2024: Protecting Your Digital Assets',
-    excerpt: 'Stay ahead of emerging threats with our comprehensive guide to cybersecurity best practices. Learn how to implement robust security measures for your organization.',
-    author: 'Emily Rodriguez',
-    date: 'January 5, 2024',
-    readTime: '10 min read',
-    category: 'Cybersecurity',
-    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000&auto=format&fit=crop',
-    tags: ['Security', 'Cybersecurity', 'Best Practices'],
-  },
-  {
-    id: 4,
-    title: 'E-commerce Revolution: Building Scalable Online Stores',
-    excerpt: 'Learn the secrets to building high-performance e-commerce platforms that can handle millions of users. From architecture to optimization strategies.',
-    author: 'David Park',
-    date: 'December 28, 2023',
-    readTime: '15 min read',
-    category: 'Web Development',
-    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1000&auto=format&fit=crop',
-    tags: ['E-commerce', 'Web Dev', 'Scalability'],
-  },
-  {
-    id: 5,
-    title: 'DevOps Excellence: Streamlining Your Development Pipeline',
-    excerpt: 'Discover how to implement effective DevOps practices that accelerate delivery while maintaining quality. From CI/CD to infrastructure as code.',
-    author: 'Rachel Green',
-    date: 'December 20, 2023',
-    readTime: '11 min read',
-    category: 'DevOps',
-    image: 'https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?q=80&w=1000&auto=format&fit=crop',
-    tags: ['DevOps', 'CI/CD', 'Automation'],
-  },
-  {
-    id: 6,
-    title: 'Mobile App Development Trends: Native vs Cross-Platform',
-    excerpt: 'Explore the pros and cons of different mobile development approaches. Make informed decisions for your next mobile project.',
-    author: 'James Wilson',
-    date: 'December 15, 2023',
-    readTime: '9 min read',
-    category: 'Mobile Development',
-    image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=1000&auto=format&fit=crop',
-    tags: ['Mobile', 'iOS', 'Android'],
-  },
-];
+import { getPublishedBlogPosts } from '@/lib/blogData';
 
 export default function Blog() {
+  const blogPosts = getPublishedBlogPosts();
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-blue-50/30 to-purple-50/30">
       <Navigation />
@@ -133,12 +66,14 @@ export default function Blog() {
                       <span className="mx-2">•</span>
                       <span>{blogPosts[0].readTime}</span>
                     </div>
-                    <motion.button
-                      className="text-blue-600 font-semibold hover:text-blue-800 transition-colors"
-                      whileHover={{ x: 5 }}
-                    >
-                      Read More →
-                    </motion.button>
+                    <Link href={`/blog/${blogPosts[0].slug}`}>
+                      <motion.button
+                        className="text-blue-600 font-semibold hover:text-blue-800 transition-colors"
+                        whileHover={{ x: 5 }}
+                      >
+                        Read More →
+                      </motion.button>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -163,42 +98,44 @@ export default function Blog() {
                   viewport={{ once: true }}
                   className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group"
                 >
-                  <div className="h-48 overflow-hidden">
-                    <img
-                      src={post.image}
-                      alt={post.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                    />
-                  </div>
-                  <div className="p-6">
-                    <span className="text-blue-600 font-semibold text-sm">
-                      {post.category}
-                    </span>
-                    <h3 className="text-xl font-bold text-gray-900 mt-2 mb-3 line-clamp-2">
-                      {post.title}
-                    </h3>
-                    <p className="text-gray-600 mb-4 line-clamp-3">
-                      {post.excerpt}
-                    </p>
-                    <div className="flex items-center justify-between text-sm text-gray-500">
-                      <div>
-                        <span>{post.author}</span>
-                        <span className="mx-2">•</span>
-                        <span>{post.readTime}</span>
+                  <Link href={`/blog/${post.slug}`}>
+                    <div className="h-48 overflow-hidden">
+                      <img
+                        src={post.image}
+                        alt={post.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                    </div>
+                    <div className="p-6">
+                      <span className="text-blue-600 font-semibold text-sm">
+                        {post.category}
+                      </span>
+                      <h3 className="text-xl font-bold text-gray-900 mt-2 mb-3 line-clamp-2 group-hover:text-blue-600 transition-colors">
+                        {post.title}
+                      </h3>
+                      <p className="text-gray-600 mb-4 line-clamp-3">
+                        {post.excerpt}
+                      </p>
+                      <div className="flex items-center justify-between text-sm text-gray-500">
+                        <div>
+                          <span>{post.author}</span>
+                          <span className="mx-2">•</span>
+                          <span>{post.readTime}</span>
+                        </div>
+                        <span>{post.date}</span>
                       </div>
-                      <span>{post.date}</span>
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        {post.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs"
+                          >
+                            #{tag}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      {post.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
+                  </Link>
                 </motion.article>
               ))}
             </div>

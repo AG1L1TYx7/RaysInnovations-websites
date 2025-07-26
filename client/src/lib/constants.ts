@@ -397,6 +397,21 @@ export const HERO_IMAGES = [
   'https://images.unsplash.com/photo-1518186285589-2f7649de83e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080'
 ];
 
+// Legacy blog posts for backward compatibility
+export const BLOG_POSTS = [
+  {
+    id: 1,
+    title: 'The Future of Cloud Computing: AWS Best Practices for 2024',
+    excerpt: 'Discover the latest AWS trends and best practices that are shaping cloud infrastructure in 2024.',
+    author: 'Sarah Johnson',
+    date: 'January 15, 2024',
+    readTime: '8 min read',
+    category: 'Cloud Computing',
+    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop',
+    tags: ['AWS', 'Cloud', 'DevOps'],
+  }
+];
+
 export const TESTIMONIALS = [
   {
     id: 1,
@@ -421,33 +436,6 @@ export const TESTIMONIALS = [
     image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100',
     rating: 5,
     text: 'Their web development team created a platform that increased our conversion rates by 300%. Outstanding technical expertise.'
-  }
-];
-
-export const BLOG_POSTS = [
-  {
-    id: 1,
-    title: 'The Future of AI in Business Operations',
-    excerpt: 'Discover how artificial intelligence is reshaping business processes and creating new opportunities for growth...',
-    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400',
-    date: 'March 15, 2024',
-    category: 'AI Development'
-  },
-  {
-    id: 2,
-    title: 'Cloud Migration Best Practices for 2024',
-    excerpt: 'Learn the essential strategies for successful cloud migration and maximize your AWS investment...',
-    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400',
-    date: 'March 12, 2024',
-    category: 'AWS Consulting'
-  },
-  {
-    id: 3,
-    title: 'Modern Web Development Trends',
-    excerpt: 'Explore the latest frameworks and technologies shaping the future of web development...',
-    image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400',
-    date: 'March 10, 2024',
-    category: 'Web Development'
   }
 ];
 

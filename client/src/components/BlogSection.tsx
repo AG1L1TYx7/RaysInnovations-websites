@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { BLOG_POSTS } from '@/lib/constants';
+import { Link } from 'wouter';
+import { getPublishedBlogPosts } from '@/lib/blogData';
 
 export default function BlogSection() {
   const containerVariants = {
@@ -43,42 +44,46 @@ export default function BlogSection() {
           viewport={{ once: true }}
           className="grid grid-cols-1 md:grid-cols-3 gap-8"
         >
-          {BLOG_POSTS.map((post) => (
+          {getPublishedBlogPosts().slice(0, 3).map((post) => (
             <motion.article
               key={post.id}
               variants={itemVariants}
               className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group cursor-pointer"
               whileHover={{ y: -5 }}
             >
-              <div className="relative overflow-hidden">
-                <img
-                  src={post.image}
-                  alt={post.title}
-                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                <div className="absolute top-4 left-4">
-                  <span className="bg-primary text-white px-3 py-1 rounded-full text-sm font-medium">
-                    {post.category}
-                  </span>
+              <Link href={`/blog/${post.slug}`}>
+                <div className="relative overflow-hidden">
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute top-4 left-4">
+                    <span className="bg-primary text-white px-3 py-1 rounded-full text-sm font-medium">
+                      {post.category}
+                    </span>
+                  </div>
                 </div>
-              </div>
-              <div className="p-6">
-                <div className="flex items-center text-sm text-gray-500 mb-3">
-                  <i className="fas fa-calendar mr-2" />
-                  <span>{post.date}</span>
+                <div className="p-6">
+                  <div className="flex items-center text-sm text-gray-500 mb-3">
+                    <i className="fas fa-calendar mr-2" />
+                    <span>{post.date}</span>
+                    <span className="mx-2">•</span>
+                    <span>{post.readTime}</span>
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-primary transition-colors">
+                    {post.title}
+                  </h3>
+                  <p className="text-gray-600 mb-4 line-clamp-3">{post.excerpt}</p>
+                  <motion.div
+                    className="text-primary hover:text-blue-700 font-medium inline-flex items-center"
+                    whileHover={{ x: 5 }}
+                  >
+                    Read More
+                    <i className="fas fa-arrow-right ml-2" />
+                  </motion.div>
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-primary transition-colors">
-                  {post.title}
-                </h3>
-                <p className="text-gray-600 mb-4">{post.excerpt}</p>
-                <motion.button
-                  className="text-primary hover:text-blue-700 font-medium inline-flex items-center"
-                  whileHover={{ x: 5 }}
-                >
-                  Read More
-                  <i className="fas fa-arrow-right ml-2" />
-                </motion.button>
-              </div>
+              </Link>
             </motion.article>
           ))}
         </motion.div>
@@ -90,13 +95,15 @@ export default function BlogSection() {
           viewport={{ once: true }}
           className="text-center mt-12"
         >
-          <motion.button
-            className="bg-primary text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            View All Articles
-          </motion.button>
+          <Link href="/blog">
+            <motion.button
+              className="bg-primary text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              View All Articles
+            </motion.button>
+          </Link>
         </motion.div>
       </div>
     </section>
