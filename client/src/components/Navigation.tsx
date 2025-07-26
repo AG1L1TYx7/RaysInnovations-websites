@@ -193,7 +193,10 @@ export default function Navigation() {
                             All Services
                           </motion.h4>
                           
-                          <div className="grid grid-cols-3 gap-4">
+                          <div 
+                            className="grid grid-cols-3 gap-4"
+                            onMouseLeave={() => setHoveredService(null)}
+                          >
                                 {Object.values(SERVICES).map((service, index) => (
                                   <motion.button
                                     key={service.id}
@@ -203,7 +206,6 @@ export default function Navigation() {
                                         : 'bg-white hover:bg-gradient-to-br hover:from-blue-50 hover:to-purple-50 border-gray-200 hover:border-blue-300'
                                     }`}
                                     onMouseEnter={() => setHoveredService(service.id)}
-                                    onMouseLeave={() => setHoveredService(null)}
                                     onClick={() => {
                                       setIsServicesOpen(false);
                                       navigateToSection('services');
@@ -251,6 +253,8 @@ export default function Navigation() {
                                 exit={{ opacity: 0, y: -20 }}
                                 transition={{ duration: 0.3 }}
                                 className="mt-4 bg-gradient-to-br from-gray-50 to-blue-50 rounded-xl p-4 border border-gray-200"
+                                onMouseEnter={() => setHoveredService(hoveredService)}
+                                onMouseLeave={() => setHoveredService(null)}
                               >
                                   {(() => {
                                     const service = SERVICES[hoveredService as keyof typeof SERVICES];
@@ -319,6 +323,7 @@ export default function Navigation() {
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     className="mt-4 flex items-center justify-center text-center bg-gradient-to-br from-gray-50 to-blue-50 rounded-xl border border-gray-200 p-8"
+                                    onMouseEnter={() => setHoveredService(null)}
                                   >
                                     <div className="space-y-3">
                                       <div className="w-16 h-16 mx-auto bg-gradient-to-br from-blue-100 to-purple-100 rounded-xl flex items-center justify-center">
