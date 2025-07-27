@@ -354,6 +354,165 @@
     75% { transform: translateY(-12px) translateX(8px) scale(1.05); opacity: 0.9; }
   }
 
+  /* Ultra-premium service enhancements */
+  .service-card-ultra {
+    background: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(248,250,252,0.9));
+    backdrop-filter: blur(25px);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card-ultra::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+      transparent, 
+      rgba(255,255,255,0.8), 
+      rgba(255,255,255,0.4), 
+      transparent);
+    transition: left 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .service-card-ultra:hover::before {
+    left: 100%;
+  }
+
+  .service-card-ultra:hover {
+    transform: translateY(-20px) scale(1.05) rotateX(2deg) rotateY(2deg);
+    box-shadow: 
+      0 35px 70px rgba(0, 0, 0, 0.2),
+      0 0 50px rgba(59, 130, 246, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  }
+
+  /* Holographic effect */
+  .holographic {
+    background: linear-gradient(45deg, 
+      #ff006e, #3700ff, #00d4ff, #00ff88, #ffaa00, #ff006e);
+    background-size: 400% 400%;
+    animation: holographic 8s ease-in-out infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  @keyframes holographic {
+    0%, 100% { background-position: 0% 50%; }
+    25% { background-position: 100% 50%; }
+    50% { background-position: 100% 100%; }
+    75% { background-position: 0% 100%; }
+  }
+
+  /* Advanced glow effects */
+  .glow-pulse {
+    animation: glowPulse 3s ease-in-out infinite;
+  }
+
+  @keyframes glowPulse {
+    0%, 100% { 
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+      filter: brightness(1);
+    }
+    50% { 
+      box-shadow: 0 0 40px rgba(59, 130, 246, 0.6);
+      filter: brightness(1.2);
+    }
+  }
+
+  /* Magnetic hover effect */
+  .magnetic-hover {
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  /* Particle trail effect */
+  .particle-trail {
+    position: relative;
+  }
+
+  .particle-trail::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: radial-gradient(circle, #3b82f6, transparent);
+    border-radius: 50%;
+    opacity: 0;
+    animation: particleTrail 2s infinite;
+  }
+
+  @keyframes particleTrail {
+    0% { opacity: 0; transform: translate(0, 0) scale(0); }
+    10% { opacity: 1; transform: translate(5px, -5px) scale(1); }
+    20% { opacity: 0.8; transform: translate(10px, -10px) scale(0.8); }
+    30% { opacity: 0.6; transform: translate(15px, -8px) scale(0.6); }
+    40% { opacity: 0.4; transform: translate(20px, -12px) scale(0.4); }
+    50% { opacity: 0.2; transform: translate(25px, -6px) scale(0.2); }
+    60% { opacity: 0; transform: translate(30px, -15px) scale(0); }
+  }
+
+  /* 3D icon container */
+  .icon-3d {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+
+  .icon-3d:hover {
+    animation: icon3D 1s ease-in-out;
+  }
+
+  @keyframes icon3D {
+    0% { transform: rotateY(0deg) rotateX(0deg); }
+    25% { transform: rotateY(90deg) rotateX(15deg); }
+    50% { transform: rotateY(180deg) rotateX(0deg); }
+    75% { transform: rotateY(270deg) rotateX(-15deg); }
+    100% { transform: rotateY(360deg) rotateX(0deg); }
+  }
+
+  /* Neon border effect */
+  .neon-border {
+    position: relative;
+  }
+
+  .neon-border::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    padding: 2px;
+    background: linear-gradient(45deg, #3b82f6, #8b5cf6, #06b6d4, #10b981, #f59e0b, #ef4444);
+    border-radius: inherit;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    animation: neonRotate 4s linear infinite;
+  }
+
+  @keyframes neonRotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  /* Liquid morphing effect */
+  .liquid-morph {
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    animation: liquidMorph 8s ease-in-out infinite;
+  }
+
+  @keyframes liquidMorph {
+    0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+    25% { border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%; }
+    50% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; }
+    75% { border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%; }
+  }
+
   /* Enhanced service card hover effects */
   .service-card:hover {
     transform: translateY(-12px) rotateX(2deg);
