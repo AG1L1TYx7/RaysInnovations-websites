@@ -93,12 +93,19 @@ export default function ServicesSection() {
   };
 
   return (
-    <section id="services" className="py-24 bg-gradient-to-br from-slate-50 via-blue-50/40 to-indigo-100/50 relative overflow-hidden">
-      {/* Enhanced Background decorative elements */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-50/30 to-indigo-50/30"></div>
-        <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-blue-200/20 to-purple-200/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-br from-indigo-200/20 to-cyan-200/20 rounded-full blur-3xl"></div>
+    <section id="services" className="py-32 bg-gradient-to-br from-slate-50 via-blue-50/40 to-indigo-100/50 relative overflow-hidden">
+      {/* Ultra Enhanced Background decorative elements */}
+      <div className="absolute inset-0 opacity-40">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-50/40 to-indigo-50/40"></div>
+        <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-blue-200/25 to-purple-200/25 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-br from-indigo-200/25 to-cyan-200/25 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-gradient-to-br from-purple-200/20 to-pink-200/20 rounded-full blur-3xl animate-pulse delay-2000"></div>
+        
+        {/* Floating geometric shapes */}
+        <div className="absolute top-20 left-20 w-8 h-8 bg-blue-400/20 rounded-lg rotate-45 animate-spin-slow"></div>
+        <div className="absolute top-40 right-32 w-6 h-6 bg-purple-400/20 rounded-full animate-bounce delay-500"></div>
+        <div className="absolute bottom-32 left-32 w-10 h-10 bg-cyan-400/20 rounded-full animate-pulse delay-1500"></div>
+        <div className="absolute bottom-20 right-20 w-7 h-7 bg-indigo-400/20 rounded-lg rotate-12 animate-spin-slow delay-1000"></div>
       </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -238,49 +245,62 @@ export default function ServicesSection() {
                 {/* Enhanced Glow effect on hover */}
                 <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 rounded-3xl blur-lg opacity-0 group-hover:opacity-30 transition duration-700 group-hover:duration-300"></div>
                 
-                {/* Ultra Enhanced card with premium effects */}
-                <div className="relative bg-white/95 backdrop-blur-lg rounded-3xl p-6 lg:p-8 text-center cursor-pointer border border-white/40 shadow-xl hover:shadow-3xl transition-all duration-700 service-card service-card-3d overflow-hidden" data-service-id={service.id}>
+                {/* Ultra Premium Enhanced card with advanced effects */}
+                <div className="relative bg-white/95 backdrop-blur-lg rounded-3xl p-6 lg:p-8 text-center cursor-pointer border border-white/40 shadow-xl hover:shadow-3xl service-card-premium gradient-border pulse-glow overflow-hidden" data-service-id={service.id}>
                   {/* Premium shimmer effect overlay */}
-                  <div className="absolute inset-0 shimmer opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                  <div className="absolute inset-0 shimmer-effect opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                  
+                  {/* Additional premium overlays */}
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-blue-400/10 to-transparent rounded-full blur-xl"></div>
+                  <div className="absolute bottom-0 left-0 w-20 h-20 bg-gradient-to-tr from-purple-400/10 to-transparent rounded-full blur-lg"></div>
                   
                   {/* Ultra Enhanced floating icon with advanced animations */}
                   <motion.div
-                    className="relative mb-8"
+                    className="relative mb-8 floating-icon"
                     whileHover={{ 
                       rotate: [0, -10, 10, -5, 5, 0], 
-                      scale: 1.2,
-                      y: -5
+                      scale: 1.25,
+                      y: -8
                     }}
-                    transition={{ duration: 0.8, type: "spring", stiffness: 200 }}
+                    transition={{ duration: 0.8, type: "spring", stiffness: 250, damping: 15 }}
                   >
-                    <div className={`w-28 h-28 rounded-3xl bg-gradient-to-br ${colors.bg} via-white/40 to-${colors.bg} flex items-center justify-center mx-auto shadow-2xl group-hover:shadow-3xl transition-all duration-700 border-2 border-white/60 relative overflow-hidden service-icon-float`}>
+                    <div className={`w-32 h-32 rounded-3xl bg-gradient-to-br ${colors.bg} via-white/50 to-${colors.bg} flex items-center justify-center mx-auto shadow-2xl group-hover:shadow-4xl transition-all duration-700 border-3 border-white/70 relative overflow-hidden service-icon-float`}>
                       {/* Multi-layer gradient overlays */}
-                      <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/30 to-transparent opacity-60"></div>
-                      <div className="absolute inset-0 bg-gradient-to-bl from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                      <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/40 to-transparent opacity-70"></div>
+                      <div className="absolute inset-0 bg-gradient-to-bl from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                      <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-transparent to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
                       
                       {/* Icon with enhanced styling */}
-                      <i className={`${service.icon} text-5xl ${colors.text} group-hover:scale-125 transition-transform duration-700 relative z-10 drop-shadow-xl`} />
+                      <i className={`${service.icon} text-6xl ${colors.text} group-hover:scale-125 transition-transform duration-700 relative z-10 drop-shadow-2xl filter`} style={{filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.1))'}} />
                       
-                      {/* Rotating border effect */}
+                      {/* Multiple rotating border effects */}
                       <div className="absolute inset-1 border-2 border-white/30 rounded-3xl animate-spin-slow opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                      <div className="absolute inset-2 border border-blue-400/20 rounded-3xl animate-spin-reverse opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200"></div>
+                      
+                      {/* Pulsing glow effect */}
+                      <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{boxShadow: `0 0 30px ${colors.text.includes('blue') ? '#3b82f6' : colors.text.includes('purple') ? '#8b5cf6' : '#06b6d4'}40`}}></div>
                     </div>
                     
-                    {/* Advanced floating particles with different animations */}
-                    <div className="absolute -top-3 -right-3 w-5 h-5 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 animate-bounce shadow-lg">
+                    {/* Advanced floating particles with enhanced animations */}
+                    <div className="absolute -top-3 -right-3 w-6 h-6 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 floating-particle shadow-xl">
                       <div className="absolute inset-0 bg-white/60 rounded-full animate-ping"></div>
+                      <div className="absolute inset-1 bg-gradient-to-r from-yellow-300 to-orange-300 rounded-full animate-pulse"></div>
                     </div>
-                    <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-700 delay-100 animate-float shadow-md"></div>
-                    <div className="absolute top-1 left-1/2 w-3 h-3 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-900 delay-200 animate-pulse shadow-sm"></div>
-                    <div className="absolute bottom-2 right-1/3 w-3.5 h-3.5 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-600 delay-300 animate-bounce shadow-md"></div>
+                    <div className="absolute -bottom-2 -left-2 w-5 h-5 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-700 delay-100 floating-particle shadow-lg"></div>
+                    <div className="absolute top-1 left-1/2 w-4 h-4 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-900 delay-200 floating-particle shadow-md"></div>
+                    <div className="absolute bottom-2 right-1/3 w-4.5 h-4.5 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-600 delay-300 floating-particle shadow-lg"></div>
+                    <div className="absolute top-1/2 -right-1 w-3 h-3 bg-gradient-to-r from-indigo-400 to-blue-400 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-800 delay-400 floating-particle shadow-sm"></div>
+                    <div className="absolute top-3 -left-1 w-3.5 h-3.5 bg-gradient-to-r from-rose-400 to-pink-400 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-750 delay-500 floating-particle shadow-md"></div>
                   </motion.div>
                   
-                  {/* Ultra Enhanced Service details with animations */}
-                  <div className="space-y-6 relative z-10">
+                  {/* Ultra Enhanced Service details with premium animations */}
+                  <div className="space-y-7 relative z-10">
                     <motion.h3 
-                      className="text-2xl lg:text-3xl font-bold text-gray-900 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-purple-600 group-hover:bg-clip-text transition-all duration-500"
-                      initial={{ opacity: 0, y: 10 }}
+                      className="text-2xl lg:text-3xl font-bold text-gray-900 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:via-purple-600 group-hover:to-indigo-600 group-hover:bg-clip-text transition-all duration-600 leading-tight"
+                      initial={{ opacity: 0, y: 15 }}
                       whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.1 }}
+                      transition={{ delay: 0.1, type: "spring", stiffness: 200 }}
+                      whileHover={{ scale: 1.05 }}
                     >
                       {service.title}
                     </motion.h3>
@@ -315,14 +335,14 @@ export default function ServicesSection() {
                       </span>
                     </motion.div>
                     
-                    {/* Ultra Enhanced CTA Button with advanced effects */}
+                    {/* Ultra Enhanced CTA Button with premium effects */}
                     <motion.button
-                      className="w-full bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 text-white px-8 py-5 rounded-2xl font-bold text-base shadow-xl hover:shadow-2xl transition-all duration-500 transform relative overflow-hidden group/btn"
-                      whileHover={{ scale: 1.03, y: -2 }}
-                      whileTap={{ scale: 0.98 }}
-                      initial={{ opacity: 0, y: 20 }}
+                      className="w-full bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 text-white px-8 py-6 rounded-2xl font-bold text-lg shadow-xl hover:shadow-3xl transition-all duration-600 transform relative overflow-hidden group/btn border border-white/20"
+                      whileHover={{ scale: 1.04, y: -3 }}
+                      whileTap={{ scale: 0.97 }}
+                      initial={{ opacity: 0, y: 25 }}
                       whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.4 }}
+                      transition={{ delay: 0.4, type: "spring", stiffness: 150 }}
                     >
                       {/* Multiple animated layers */}
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-700"></div>
